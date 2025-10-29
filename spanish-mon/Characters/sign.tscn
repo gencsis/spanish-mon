@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://7v7y7hokag3u"]
+
+[ext_resource type="Texture2D" uid="uid://c6h0v0uoxesfb" path="res://Art/objects.png" id="1_qv2il"]
+[ext_resource type="Script" uid="uid://du70iry8hh0ym" path="res://Characters/sign.gd" id="1_r1mfp"]
+[ext_resource type="PackedScene" uid="uid://crqj4juqt66h6" path="res://Interaction/interactable.tscn" id="3_t0x5x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlhpn"]
+size = Vector2(12, 10.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1mfp"]
+atlas = ExtResource("1_qv2il")
+region = Rect2(0, 0, 16, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jgb0"]
+radius = 12.0
+
+[node name="Sign" type="StaticBody2D"]
+script = ExtResource("1_r1mfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(112, -59)
+shape = SubResource("RectangleShape2D_rlhpn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(112, -60)
+texture = SubResource("AtlasTexture_r1mfp")
+
+[node name="interactable" parent="." instance=ExtResource("3_t0x5x")]
+position = Vector2(12, -4)
+interact_name = "Read Sign"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable"]
+position = Vector2(100, -54)
+shape = SubResource("CircleShape2D_7jgb0")
