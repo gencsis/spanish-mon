@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnkl8rujlgv0h"
-path="res://.godot/imported/Checker.png-0cab56c0d2672a3905f6b136d0d0fc5b.ctex"
+uid="uid://d3baj6rygkb3f"
+path="res://.godot/imported/update.svg-658b1218b6b92d804e88884101f121a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Addons/SpritesheetGenerator/Checker.png"
-dest_files=["res://.godot/imported/Checker.png-0cab56c0d2672a3905f6b136d0d0fc5b.ctex"]
+source_file="res://Addons/dialogue_manager/assets/update.svg"
+dest_files=["res://.godot/imported/update.svg-658b1218b6b92d804e88884101f121a6.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnkl8rujlgv0h"
-path="res://.godot/imported/Checker.png-0cab56c0d2672a3905f6b136d0d0fc5b.ctex"
+uid="uid://dt7cv8j5q1vne"
+path="res://.godot/imported/temp_background.webp-bf021cd9d264b00a5940cd9051c0e3d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Addons/SpritesheetGenerator/Checker.png"
-dest_files=["res://.godot/imported/Checker.png-0cab56c0d2672a3905f6b136d0d0fc5b.ctex"]
+source_file="res://Assets/backgrounds/temp_background.webp"
+dest_files=["res://.godot/imported/temp_background.webp-bf021cd9d264b00a5940cd9051c0e3d7.ctex"]
 
 [params]
 

@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var move_speed : float = 100
 @export var starting_direction : Vector2 = Vector2(0,1)
 
+const tile_size = 16
+
 #parameters/Idle/blend_positions
 
 @onready var animation_tree = $AnimationTree
