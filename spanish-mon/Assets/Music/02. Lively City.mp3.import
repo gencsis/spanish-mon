@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://es86ttgj1q3j"
+path="res://.godot/imported/02. Lively City.mp3-02ff4ba7396488038e633a9fc706b1ea.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/02. Lively City.mp3"
+dest_files=["res://.godot/imported/02. Lively City.mp3-02ff4ba7396488038e633a9fc706b1ea.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
