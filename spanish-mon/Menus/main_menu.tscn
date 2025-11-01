@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3e742gy4tbn6"]
+[gd_scene load_steps=12 format=3 uid="uid://b3e742gy4tbn6"]
 
 [ext_resource type="Script" uid="uid://iuffl3wsms3v" path="res://Menus/main_menu.gd" id="1_at0u2"]
 [ext_resource type="Texture2D" uid="uid://ehmsiyrfnr3s" path="res://Assets/backgrounds/temp_background2.jpeg" id="2_11gta"]
 [ext_resource type="FontFile" uid="uid://b5w2eb7n83jmn" path="res://Assets/fonts/8bitoperator.otf" id="3_cxdly"]
+[ext_resource type="AudioStream" uid="uid://ddo0gmdyn41kh" path="res://Assets/Music/Adventure_s-Spirit-Title-Theme.mp3" id="4_11gta"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]
 texture = ExtResource("2_11gta")
@@ -42,6 +43,19 @@ font = ExtResource("3_cxdly")
 font_size = 86
 shadow_size = 23
 shadow_color = Color(0.29954746, 0.29954746, 0.29954743, 0)
+
+[sub_resource type="GDScript" id="GDScript_11gta"]
+script/source = "extends AudioStreamPlayer
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -139,6 +153,12 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Spanish-mon"
 label_settings = SubResource("LabelSettings_fu7sn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_11gta")
+volume_db = -5.0
+autoplay = true
+script = SubResource("GDScript_11gta")
 
 [connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Buttons/Options" to="." method="_on_options_pressed"]

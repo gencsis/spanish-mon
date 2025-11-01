@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dlv27mevwhteg" path="res://Characters/player_axol.tscn" id="1_5knpo"]
 [ext_resource type="Script" uid="uid://gfxuuxgjam2d" path="res://Phases/game_level.gd" id="1_qpuak"]
-[ext_resource type="Texture2D" uid="uid://ccmpdkarp3tmd" path="res://Art/Hills.png" id="2_q4rmn"]
+[ext_resource type="Texture2D" uid="uid://ccmpdkarp3tmd" path="res://Assets/tiles/Hills.png" id="2_q4rmn"]
 [ext_resource type="PackedScene" uid="uid://7v7y7hokag3u" path="res://Characters/sign.tscn" id="2_uik20"]
-[ext_resource type="Texture2D" uid="uid://c6h0v0uoxesfb" path="res://Art/objects.png" id="3_uik20"]
-[ext_resource type="AudioStream" uid="uid://es86ttgj1q3j" path="res://Assets/Music/02. Lively City.mp3" id="5_jwx38"]
+[ext_resource type="Texture2D" uid="uid://c6h0v0uoxesfb" path="res://Assets/tiles/objects.png" id="3_uik20"]
+[ext_resource type="AudioStream" uid="uid://bonf5cf46kty6" path="res://Assets/Music/A-Great-Journey-Overworld.mp3" id="6_qpuak"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwx38"]
 texture = ExtResource("2_q4rmn")
@@ -360,6 +360,6 @@ tile_set = SubResource("TileSet_2w8oc")
 zoom = Vector2(5, 5)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_jwx38")
+stream = ExtResource("6_qpuak")
 
 [connection signal="finished" from="Music" to="." method="_on_audio_stream_player_finished"]
