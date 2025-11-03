@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://7v7y7hokag3u"]
 
-[ext_resource type="Texture2D" uid="uid://c6h0v0uoxesfb" path="res://Art/objects.png" id="1_qv2il"]
+[ext_resource type="Texture2D" uid="uid://c6h0v0uoxesfb" path="res://Assets/tiles/objects.png" id="1_qv2il"]
 [ext_resource type="Script" uid="uid://du70iry8hh0ym" path="res://Characters/sign.gd" id="1_r1mfp"]
 [ext_resource type="PackedScene" uid="uid://crqj4juqt66h6" path="res://Interaction/interactable.tscn" id="3_t0x5x"]
 
@@ -27,7 +27,7 @@ texture = SubResource("AtlasTexture_r1mfp")
 
 [node name="interactable" parent="." instance=ExtResource("3_t0x5x")]
 position = Vector2(12, -4)
-interact_name = "Read Sign"
+interact_name = "E to Interact"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactable"]
 position = Vector2(100, -54)

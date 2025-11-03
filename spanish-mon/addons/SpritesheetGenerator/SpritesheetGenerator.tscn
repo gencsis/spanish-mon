@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf3b0i8scthbm"]
 
-[ext_resource type="Texture2D" uid="uid://bnkl8rujlgv0h" path="res://addons/SpritesheetGenerator/Checker.png" id="1_hs1uu"]
+[ext_resource type="Texture2D" uid="uid://bnkl8rujlgv0h" path="res://Addons/SpritesheetGenerator/Checker.png" id="1_hs1uu"]
 
 [sub_resource type="GDScript" id="1"]
 resource_name = "Generator"
