@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dyxbmyvpkkcvs"
-path="res://.godot/imported/GutIconV2_base.png-7038b445a6dfa6ba4cec1a42fa81abae.ctex"
+path="res://.godot/imported/GutIconV2_base.png-cb9989c093faead7df93ce8a4294e3d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gut/images/GutIconV2_base.png"
-dest_files=["res://.godot/imported/GutIconV2_base.png-7038b445a6dfa6ba4cec1a42fa81abae.ctex"]
+source_file="res://Addons/gut/images/GutIconV2_base.png"
+dest_files=["res://.godot/imported/GutIconV2_base.png-cb9989c093faead7df93ce8a4294e3d3.ctex"]
 
 [params]
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2j7djstay7x6"]
+
+[ext_resource type="Texture2D" uid="uid://boqbti3ytvnbv" path="res://Assets/ninepatch_default_blackt.png" id="1_iblgj"]
+
+[node name="WindowDefault" type="NinePatchRect"]
+size_flags_horizontal = 3
+texture = ExtResource("1_iblgj")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
