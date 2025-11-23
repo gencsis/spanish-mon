@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmw8oen8r7umc"
-path="res://.godot/imported/ninepatch_default_blackt.png-2ed8000419f8dce6fddd7362bd898fa5.ctex"
+uid="uid://bdq4syw0fgw1e"
+path="res://.godot/imported/dialouge_bubble.png-f52fc544f5d901b3f2b0e3b0288d4ea0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ninepatch_default_blackt.png"
-dest_files=["res://.godot/imported/ninepatch_default_blackt.png-2ed8000419f8dce6fddd7362bd898fa5.ctex"]
+source_file="res://Assets/UI/dialouge_bubble.png"
+dest_files=["res://.godot/imported/dialouge_bubble.png-f52fc544f5d901b3f2b0e3b0288d4ea0.ctex"]
 
 [params]
 

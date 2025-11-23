@@ -1,42 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3e742gy4tbn6"]
+[gd_scene load_steps=8 format=3 uid="uid://b3e742gy4tbn6"]
 
-[ext_resource type="Script" uid="uid://iuffl3wsms3v" path="res://Menus/main_menu.gd" id="1_at0u2"]
-[ext_resource type="Texture2D" uid="uid://ehmsiyrfnr3s" path="res://Assets/backgrounds/temp_background2.jpeg" id="2_11gta"]
+[ext_resource type="Script" uid="uid://iuffl3wsms3v" path="res://Menus/main_menu.gd" id="1_11gta"]
+[ext_resource type="Texture2D" uid="uid://dt7cv8j5q1vne" path="res://Assets/backgrounds/temp_background.webp" id="2_11gta"]
 [ext_resource type="FontFile" uid="uid://b5w2eb7n83jmn" path="res://Assets/fonts/8bitoperator.otf" id="3_cxdly"]
 [ext_resource type="AudioStream" uid="uid://ddo0gmdyn41kh" path="res://Assets/Music/Adventure_s-Spirit-Title-Theme.mp3" id="4_11gta"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]
 texture = ExtResource("2_11gta")
 modulate_color = Color(0.4506483, 0.4506483, 0.45064825, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhts7"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-shadow_color = Color(0, 0, 0, 0.5686275)
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
-bg_color = Color(0.49354547, 0.49354553, 0.49354553, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-shadow_color = Color(0, 0, 0, 0.5686275)
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jix8l"]
-bg_color = Color(0.66245234, 0.66245234, 0.6624523, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-shadow_color = Color(0, 0, 0, 0.5686275)
-shadow_size = 4
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fu7sn"]
 font = ExtResource("3_cxdly")
@@ -64,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_at0u2")
+script = ExtResource("1_11gta")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -75,57 +46,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_7vrkn")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Buttons" type="CenterContainer" parent="."]
 layout_mode = 1
-offset_left = 15.0
-offset_top = 88.0
-offset_right = 148.0
-offset_bottom = 204.0
+offset_left = 86.0
+offset_top = 56.0
+offset_right = 219.0
+offset_bottom = 172.0
 
-[node name="Start" type="Button" parent="Buttons"]
+[node name="Options" type="VBoxContainer" parent="Buttons"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_cxdly")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
-text = "Start"
-metadata/_edit_use_anchors_ = true
-
-[node name="Options" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_cxdly")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
-text = "Options"
-metadata/_edit_use_anchors_ = true
-
-[node name="Exit" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_cxdly")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_rhts7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
-text = "Exit
-"
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -134,21 +63,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -69.0
-offset_right = -39.0
-offset_bottom = -28.0
+offset_left = -55.0
+offset_top = -72.0
+offset_right = 45.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Copan"
+text = "Type-Shi"
 label_settings = SubResource("LabelSettings_fu7sn")
+horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_11gta")
 volume_db = -5.0
 autoplay = true
 script = SubResource("GDScript_11gta")
-
-[connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Buttons/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Buttons/Exit" to="." method="_on_exit_pressed"]

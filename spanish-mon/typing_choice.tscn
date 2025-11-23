@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ma0hs0xhfhc"]
+
+[ext_resource type="Script" uid="uid://clj3w3j60ovn8" path="res://typing_choice.gd" id="1_7xat0"]
+
+[node name="TypingChoice" type="Node2D" groups=["player"]]
+script = ExtResource("1_7xat0")
+
+[node name="Option0" type="RichTextLabel" parent="."]
+z_index = 5
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option1" type="RichTextLabel" parent="."]
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 66.0
+bbcode_enabled = true

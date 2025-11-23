@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmw8oen8r7umc"
-path="res://.godot/imported/ninepatch_default_blackt.png-2ed8000419f8dce6fddd7362bd898fa5.ctex"
+uid="uid://du7auo771xa28"
+path="res://.godot/imported/amna_sprite3.png-42baff82d421ca2e423aafe861e93de4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ninepatch_default_blackt.png"
-dest_files=["res://.godot/imported/ninepatch_default_blackt.png-2ed8000419f8dce6fddd7362bd898fa5.ctex"]
+source_file="res://Assets/characters/amna_sprite3.png"
+dest_files=["res://.godot/imported/amna_sprite3.png-42baff82d421ca2e423aafe861e93de4.ctex"]
 
 [params]
 

@@ -12,7 +12,14 @@ func _ready():
 	update_animation_parameters(starting_direction)
 
 func _physics_process(_delta):
+	
+	if not can_move:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
 	#get input direction
+	
 	var input_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -29,6 +36,13 @@ func _physics_process(_delta):
 	move_and_slide()
 	pick_new_state()
 	
+
+var can_move: bool = true
+
+func set_can_move(value: bool) -> void:
+	can_move = value
+	if not can_move:
+		velocity = Vector2.ZERO
 
 func update_animation_parameters(move_input : Vector2):
 	if(move_input != Vector2.ZERO):

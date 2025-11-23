@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0rfuodnnvpci"]
+
+[ext_resource type="Script" uid="uid://tlt8xbl3jokf" path="res://dialouge_bubble.gd" id="1_wfkn4"]
+[ext_resource type="Texture2D" uid="uid://q125u65cqj8i" path="res://Assets/UI/speech_bubble.png" id="2_wfkn4"]
+
+[node name="DialogueBubble" type="Node2D"]
+script = ExtResource("1_wfkn4")
+
+[node name="Bubble" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(64, 24)
+offset_right = 12.0
+offset_bottom = 12.0
+texture = ExtResource("2_wfkn4")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="RichTextLabel" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(80, 16)
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 60.0
+offset_bottom = 21.0
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmw8oen8r7umc"
-path="res://.godot/imported/ninepatch_default_blackt.png-2ed8000419f8dce6fddd7362bd898fa5.ctex"
+uid="uid://bnm4fqyggn2ie"
+path="res://.godot/imported/worm_better.png-c75c77c26c77704b5cab6920144c1a80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ninepatch_default_blackt.png"
-dest_files=["res://.godot/imported/ninepatch_default_blackt.png-2ed8000419f8dce6fddd7362bd898fa5.ctex"]
+source_file="res://Assets/TEMP_CHARACTERS/worm_better.png"
+dest_files=["res://.godot/imported/worm_better.png-c75c77c26c77704b5cab6920144c1a80.ctex"]
 
 [params]
 

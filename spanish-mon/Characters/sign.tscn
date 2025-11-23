@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c6h0v0uoxesfb" path="res://Assets/tiles/objects.png" id="1_qv2il"]
 [ext_resource type="Script" uid="uid://du70iry8hh0ym" path="res://Characters/sign.gd" id="1_r1mfp"]
-[ext_resource type="PackedScene" uid="uid://crqj4juqt66h6" path="res://Interaction/interactable.tscn" id="3_t0x5x"]
+[ext_resource type="PackedScene" uid="uid://c0ma0hs0xhfhc" path="res://typing_choice.tscn" id="3_r1mfp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlhpn"]
 size = Vector2(12, 10.5)
@@ -11,24 +11,23 @@ size = Vector2(12, 10.5)
 atlas = ExtResource("1_qv2il")
 region = Rect2(0, 0, 16, 15)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7jgb0"]
-radius = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1mfp"]
+radius = 18.0
 
 [node name="Sign" type="StaticBody2D"]
 script = ExtResource("1_r1mfp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(112, -59)
 shape = SubResource("RectangleShape2D_rlhpn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(112, -60)
 texture = SubResource("AtlasTexture_r1mfp")
 
-[node name="interactable" parent="." instance=ExtResource("3_t0x5x")]
-position = Vector2(12, -4)
-interact_name = "E to Interact"
+[node name="TypingChoice" parent="." instance=ExtResource("3_r1mfp")]
+position = Vector2(-20, -37)
+options = Array[String](["read"])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable"]
-position = Vector2(100, -54)
-shape = SubResource("CircleShape2D_7jgb0")
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_r1mfp")

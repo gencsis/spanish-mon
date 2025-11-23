@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgtofxltuoxel"]
+
+[ext_resource type="Script" uid="uid://donlqpgaiwkrq" path="res://hud.gd" id="1_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://ce4vvfotmw5q5" path="res://Assets/UI/hearts_one1.png" id="2_640wx"]
+[ext_resource type="Texture2D" uid="uid://otf1asx82w0a" path="res://Assets/UI/single_inventory.png" id="3_a2258"]
+[ext_resource type="PackedScene" uid="uid://c0ma0hs0xhfhc" path="res://typing_choice.tscn" id="4_640wx"]
+[ext_resource type="Texture2D" uid="uid://ousxmhn6rpbb" path="res://Assets/UI/single_inventory-highlighted.png" id="4_a2258"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_8sq4i")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="InventoryGrid" type="GridContainer" parent="Root"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="Slot1" type="Control" parent="Root/InventoryGrid"]
+layout_mode = 2
+
+[node name="Heart1" type="TextureRect" parent="Root/InventoryGrid/Slot1"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 16.0
+offset_bottom = 17.0
+texture = ExtResource("2_640wx")
+stretch_mode = 3
+
+[node name="Inventory1" type="TextureRect" parent="Root/InventoryGrid/Slot1"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 16.0
+offset_bottom = 36.0
+texture = ExtResource("3_a2258")
+stretch_mode = 3
+
+[node name="H_Inventory1" type="TextureRect" parent="Root/InventoryGrid/Slot1"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 16.0
+offset_bottom = 36.0
+texture = ExtResource("4_a2258")
+stretch_mode = 3
+
+[node name="Item1" type="TextureRect" parent="Root/InventoryGrid/Slot1"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 16.0
+offset_bottom = 36.0
+texture = ExtResource("3_a2258")
+stretch_mode = 3
+
+[node name="Slot2" type="Control" parent="Root/InventoryGrid"]
+layout_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="Root/InventoryGrid/Slot2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 1.0
+offset_right = 28.0
+offset_bottom = 17.0
+texture = ExtResource("2_640wx")
+
+[node name="Inventory2" type="TextureRect" parent="Root/InventoryGrid/Slot2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 28.0
+offset_bottom = 36.0
+texture = ExtResource("3_a2258")
+
+[node name="H_Inventory2" type="TextureRect" parent="Root/InventoryGrid/Slot2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 28.0
+offset_bottom = 36.0
+texture = ExtResource("4_a2258")
+
+[node name="Item2" type="TextureRect" parent="Root/InventoryGrid/Slot2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 28.0
+offset_bottom = 36.0
+texture = ExtResource("3_a2258")
+stretch_mode = 3
+
+[node name="Slot3" type="Control" parent="Root/InventoryGrid"]
+layout_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="Root/InventoryGrid/Slot3"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 17.0
+texture = ExtResource("2_640wx")
+
+[node name="Inventory3" type="TextureRect" parent="Root/InventoryGrid/Slot3"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 36.0
+texture = ExtResource("3_a2258")
+
+[node name="H_Inventory3" type="TextureRect" parent="Root/InventoryGrid/Slot3"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 36.0
+texture = ExtResource("4_a2258")
+
+[node name="Item3" type="TextureRect" parent="Root/InventoryGrid/Slot3"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 41.0
+offset_bottom = 36.0
+texture = ExtResource("3_a2258")
+stretch_mode = 3
+
+[node name="EatWord" parent="Root" instance=ExtResource("4_640wx")]
+position = Vector2(0, -28)
+options = Array[String](["eat", ""])
