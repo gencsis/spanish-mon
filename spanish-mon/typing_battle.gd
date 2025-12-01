@@ -47,10 +47,32 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not battle_active:
 		return
-
+	
 	if event is InputEventKey and event.pressed and event.unicode != 0:
 		var ch := char(event.unicode)
 		_handle_player_char(ch)
+		
+	#code if you want arrow keys as typing inputs
+	#if event is InputEventKey and event.pressed:
+		#var e:= event as InputEventKey
+		#match e.keycode:
+			#KEY_UP:
+				#_handle_player_char("↑")
+				#return
+			#KEY_DOWN:
+				#_handle_player_char("↓")
+				#return
+			#KEY_LEFT:
+				#_handle_player_char("←")
+				#return
+			#KEY_RIGHT:
+				#_handle_player_char("→")
+				#return
+		#if e.unicode != 0:
+			#var ch := char(e.unicode)
+			#_handle_player_char(ch)
+		
+		
 
 
 func _handle_player_char(ch: String) -> void:

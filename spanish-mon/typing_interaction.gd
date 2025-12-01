@@ -81,11 +81,28 @@ func _unhandled_input(event: InputEvent) -> void:
 				# You can leave it active or stop; here I stop it:
 				stop()
 			return
+			
+		# Detect arrow keys as characters
+		match e.keycode:
+			KEY_UP:
+				_handle_typed_char("↑")
+				return
+			KEY_DOWN:
+				_handle_typed_char("↓")
+				return
+			KEY_LEFT:
+				_handle_typed_char("←")
+				return
+			KEY_RIGHT:
+				_handle_typed_char("→")
+				return
 
 		# Handle actual character typing
 		if e.unicode != 0:
 			var char_typed := char(e.unicode).to_lower()
 			_handle_typed_char(char_typed)
+			
+			
 
 
 func _change_option(keycode: Key) -> void:
