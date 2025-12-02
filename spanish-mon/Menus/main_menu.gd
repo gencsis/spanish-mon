@@ -147,7 +147,7 @@ func _confirm_selection() -> void:
 
 
 func _start_game() -> void:
-	get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
+	get_tree().change_scene_to_file("res://intro.tscn")
 
 
 func _continue_game() -> void:
