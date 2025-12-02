@@ -4,6 +4,7 @@ class_name TypingBattle
 @onready var sentence_label: RichTextLabel = $TextBox/SentenceLabel
 @onready var enemy_timer: Timer = $EnemyTimer
 @onready var timer_label: Label = $TimeLabel
+@onready var sfx_loseHeart = $sfx_loseHeart
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -27,7 +28,6 @@ var hearts: int = 3
 const PLAYER_TYPED_COLOR := "#ffffff"
 const PLAYER_REMAIN_COLOR := "#000000"
 const CURRENT_CHAR_COLOR := "#2E6F40"   # highlighted letter
-
 
 func _ready() -> void:
 	player_index = 0
@@ -147,11 +147,11 @@ func _update_hearts() -> void:
 	for i in range(heart_icons.size()):
 		heart_icons[i].texture = FULL_HEART if i < hearts else EMPTY_HEART
 
-
 func _lose_heart() -> void:
 	hearts -= 1
 	_update_hearts()
-
+	sfx_loseHeart.play()
+	
 	if hearts <= 0:
 		_on_enemy_wins()
 
