@@ -162,16 +162,18 @@ func _on_player_wins() -> void:
 	sentence_label.text = "[color=#00ff00]You won the battle![/color]"
 	_update_timer_label()
 	sfx_winBattle.play()
-	
-	if GlobalGameState.current_battle_npc == "aurora":
-		GlobalGameState.collect_ship_piece("piece_one")
 
-	if GlobalGameState.current_battle_npc == "random":
-		pass
-	
+	match GlobalGameState.current_battle_npc:
+		"aurora":
+			GlobalGameState.collect_ship_piece("piece_one")
+		"orion":
+			GlobalGameState.mark_npc_defeated("orion")
+		_:
+			pass
+
 	GlobalGameState.current_battle_npc = ""
 	GlobalGameState.current_battle_sentence = ""
-	
+
 	await get_tree().create_timer(1.0).timeout
 	if get_tree():
 		get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
