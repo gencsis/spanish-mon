@@ -35,7 +35,7 @@ func _on_talk_chosen(index: int, word: String) -> void:
 	if word.to_lower() == "talk":
 		has_talked = true
 		
-		if GlobalGameState.has_piece_three:
+		if GlobalGameState.has_piece_one:
 			_show_already_beaten_message()
 		else:
 			_show_dialogue_then_battle()

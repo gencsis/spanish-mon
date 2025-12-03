@@ -193,8 +193,7 @@ func _on_player_wins() -> void:
 	GlobalGameState.current_battle_npc = ""
 	GlobalGameState.current_battle_sentence = ""
 	
-	if GlobalGameState.current_battle_npc == "nova":
-		GlobalGameState.collect_ship_piece("piece_two")
+	GlobalGameState.collect_ship_piece("piece_two")
 		
 	await get_tree().create_timer(2.0).timeout
 	if get_tree():

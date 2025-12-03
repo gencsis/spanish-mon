@@ -163,8 +163,7 @@ func _on_player_wins() -> void:
 	_update_timer_label()
 	sfx_winBattle.play()
 	
-	if GlobalGameState.current_battle_npc == "aurora":
-		GlobalGameState.collect_ship_piece("piece_one")
+	GlobalGameState.collect_ship_piece("piece_one")
 
 	if GlobalGameState.current_battle_npc == "random":
 		pass
