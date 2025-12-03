@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgtofxltuoxel"]
+[gd_scene load_steps=7 format=3 uid="uid://cgtofxltuoxel"]
 
 [ext_resource type="Script" uid="uid://donlqpgaiwkrq" path="res://hud.gd" id="1_8sq4i"]
 [ext_resource type="Texture2D" uid="uid://ce4vvfotmw5q5" path="res://Assets/UI/hearts_one1.png" id="2_640wx"]
 [ext_resource type="Texture2D" uid="uid://otf1asx82w0a" path="res://Assets/UI/single_inventory.png" id="3_a2258"]
 [ext_resource type="PackedScene" uid="uid://c0ma0hs0xhfhc" path="res://typing_choice.tscn" id="4_640wx"]
 [ext_resource type="Texture2D" uid="uid://ousxmhn6rpbb" path="res://Assets/UI/single_inventory-highlighted.png" id="4_a2258"]
+[ext_resource type="AudioStream" uid="uid://uv8h8kbb3m1s" path="res://Assets/Music/item-pick-up-38258.mp3" id="6_1xsix"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_8sq4i")
@@ -134,3 +135,6 @@ stretch_mode = 3
 [node name="EatWord" parent="Root" instance=ExtResource("4_640wx")]
 position = Vector2(0, -28)
 options = Array[String](["eat", ""])
+
+[node name="sfx_gainHeart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1xsix")

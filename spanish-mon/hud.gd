@@ -28,7 +28,7 @@ extends CanvasLayer
 ]
 
 
-
+@onready var sfx_gainHeart = $sfx_gainHeart
 @onready var eat_word: TypingChoice2D = $Root/EatWord
 
 const WORM_ICON = preload("res://Assets/UI/worm-inventory.png")
@@ -84,6 +84,7 @@ func set_hearts(count: int) -> void:
 			
 func increase_hearts(amount: int) -> void:
 	set_hearts(current_hearts + amount)
+	sfx_gainHeart.play()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Open/use bag with Z
