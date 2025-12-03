@@ -67,5 +67,9 @@ func _show_dialogue_then_battle() -> void:
 
 func _start_battle() -> void:
 	if get_tree():
+		var player := get_tree().get_first_node_in_group("player")
+		if player:
+			GlobalGameState.save_player_position(player.global_position)
+			
 		GlobalGameState.set_battle_context("nova", "")
 		get_tree().change_scene_to_file("res://unscramble_battle.tscn")

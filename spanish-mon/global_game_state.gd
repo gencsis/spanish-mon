@@ -29,7 +29,8 @@ var current_battle_sentence: String = ""
 
 # Player position tracking 
 var player_last_position: Vector2 = Vector2.ZERO
-var player_spawn_position: Vector2 = Vector2(100, 100)
+var player_spawn_position: Vector2 = Vector2(0, 0)
+var has_saved_player_position: bool = false
 
 var defeated_npcs: Array[String] = []
 
@@ -73,7 +74,8 @@ func reset_game() -> void:
 	defeated_npcs.clear()
 	player_last_position = player_spawn_position
 	health_changed.emit(player_current_health)
-	print("Game reset! Health: ", player_current_health)
+	print("Game reset. Health: ", player_current_health)
+	clear_saved_player_position()
 
 func get_pieces_text() -> String:
 	return "Ship Pieces: %d/%d" % [ship_pieces_collected, TOTAL_SHIP_PIECES]
@@ -100,10 +102,14 @@ func is_dead() -> bool:
 
 func save_player_position(pos: Vector2) -> void:
 	player_last_position = pos
+	has_saved_player_position = true
 	print("Saved player position: ", pos)
 
 func get_player_return_position() -> Vector2:
-	return player_last_position
+	if has_saved_player_position:
+		return player_last_position
+	else:
+		return player_spawn_position
 
 func mark_npc_defeated(npc_name: String) -> void:
 	if not defeated_npcs.has(npc_name):
@@ -112,3 +118,6 @@ func mark_npc_defeated(npc_name: String) -> void:
 
 func is_npc_defeated(npc_name: String) -> bool:
 	return defeated_npcs.has(npc_name)
+
+func clear_saved_player_position() -> void:
+	has_saved_player_position = false

@@ -32,12 +32,12 @@ texture = ExtResource("2_71a7u")
 
 [node name="Enemy" type="Sprite2D" parent="."]
 position = Vector2(262, 26)
-scale = Vector2(2.382, 2)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_71a7u")
 
 [node name="Player" type="Sprite2D" parent="."]
-position = Vector2(66.87501, 77.875)
-scale = Vector2(2.863, 2)
+position = Vector2(62.592255, 79.3125)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_1pvpm")
 hframes = 4
 vframes = 8

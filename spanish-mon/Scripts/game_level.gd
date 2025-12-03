@@ -1,17 +1,15 @@
 extends Node2D
 
 @onready var asp = $Music
+@onready var player: Node2D = $Characters/PlayerAxol
 
 var volume = -10
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-# Restore player position
-	var player = $Characters/PlayerAxol
-	if GlobalGameState.player_position != Vector2.ZERO:
-		player.global_position = GlobalGameState.player_position
+	var pos := GlobalGameState.get_player_return_position()
+	player.global_position = pos
 
-	# Restore NPCs
 	for name in GlobalGameState.npcs.keys():
 		var data = GlobalGameState.npcs[name]
 		var npc = load(data["scene_path"]).instantiate()

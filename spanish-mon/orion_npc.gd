@@ -59,5 +59,9 @@ func _show_all_dialogue() -> void:
 
 func _start_tutorial_battle() -> void:
 	if get_tree():
+		var player := get_tree().get_first_node_in_group("player")
+		if player:
+			GlobalGameState.save_player_position(player.global_position)
+			
 		GlobalGameState.set_battle_context("orion", "The enemies you come across will have typing battles like these.")
 		get_tree().change_scene_to_file("res://typing_battle.tscn")

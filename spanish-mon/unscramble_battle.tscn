@@ -81,6 +81,7 @@ expand_mode = 3
 
 [node name="Heart3" type="TextureRect" parent="Hearts"]
 layout_mode = 2
+expand_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 0

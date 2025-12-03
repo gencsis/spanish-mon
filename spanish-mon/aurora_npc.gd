@@ -67,5 +67,9 @@ func _show_dialogue_then_battle() -> void:
 
 func _start_battle() -> void:
 	if get_tree():
+		var player := get_tree().get_first_node_in_group("player")
+		if player:
+			GlobalGameState.save_player_position(player.global_position)
+			
 		GlobalGameState.set_battle_context("aurora", "For some crazy reason, the medic didn't consider a lack of milk for my cereal as a proper emergency.")
 		get_tree().change_scene_to_file("res://typing_battle.tscn")
