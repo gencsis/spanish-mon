@@ -703,10 +703,10 @@ texture = ExtResource("8_fwnm2")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lkjfk"]
 texture = ExtResource("22_aphk7")
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.2590122, -1.6187286, 1.2590103, -2.5180216, -0.71943474, 3.956892, 0.71943474, -0.35971642, 0.8992939, 8, -1.7985878, 8)
 1:0/0 = 0
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -2.0683746, -8, -1.8885174, 8, 8, 8)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.2590103, -3.2374563, -1.4388695, -3.4173155, -1.8885174, 8, 0.8992939, 8)
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.62950516, -8, 0.62950516, 8, -8, 8)
 1:1/0 = 0
@@ -718,10 +718,10 @@ texture = ExtResource("22_aphk7")
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -2.0683746, -8, -1.8885174, 8, 8, 8)
 0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.62950516, -8, 0.62950516, 8, -8, 8)
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.3381634, -8, 0.62950516, -8, 0.8992939, 0.71943474, -0.8992939, 0)
 1:3/0 = 0
 2:3/0 = 0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -2.0683746, -8, -1.8885174, 8, 8, 8)
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.0791531, -8, 0, -8, -2.0683746, -8, -0.8992939, 0.71943474, -0.35971832, -0.5395756, 1.4388695, 0.17985916)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_acj1n"]
 texture = ExtResource("7_mxr21")
@@ -1018,14 +1018,14 @@ stream = ExtResource("14_fr8xg")
 position = Vector2(35, 47)
 
 [node name="BadNPC - A" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(388, -5)
+position = Vector2(452, -60)
 battle_type = 2
 
 [node name="BadNPC - S" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(305, -64)
+position = Vector2(298, -72)
 battle_type = 1
 
 [node name="BadNPC" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(320, 14)
+position = Vector2(388, 31)
 
 [connection signal="finished" from="Music" to="." method="_on_audio_stream_player_finished"]

@@ -147,7 +147,9 @@ func _confirm_selection() -> void:
 
 
 func _start_game() -> void:
+	GlobalGameState.player_position = Vector2.ZERO
 	get_tree().change_scene_to_file("res://intro.tscn")
+	
 
 
 

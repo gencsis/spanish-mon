@@ -3,6 +3,13 @@ extends Node
 var ship_pieces_collected: int = 0
 const TOTAL_SHIP_PIECES: int = 3
 
+#track player location
+var player_position: Vector2 = Vector2.ZERO
+
+# NPC states dictionary
+# Each entry: npc_name -> {scene_path, position, optional other states}
+var npcs := {}
+
 #tracking pieces
 var has_piece_one: bool = false
 var has_piece_two: bool = false

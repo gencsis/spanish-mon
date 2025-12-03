@@ -12,6 +12,7 @@ enum BattleType {
 
 @export var battle_type: BattleType = BattleType.TIMED_TYPING
 
+
 @export_file("*.tscn") var timed_typing_scene: String = "res://typing_battle.tscn"
 @export_file("*.tscn") var unscramble_scene: String = "res://unscramble_battle.tscn"
 @export_file("*.tscn") var arrow_battle_scene: String = "res://arrow_battle.tscn"
@@ -22,10 +23,21 @@ func _ready() -> void:
 func _on_area_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		_start_battle()
-
+		
 func _start_battle() -> void:
-	var scene_path: String
+	var player = get_tree().current_scene.get_node("Characters/PlayerAxol")
+	GlobalGameState.player_position = player.global_position + Vector2(0, 20)
 	
+	 # Save all NPCs
+	GlobalGameState.npcs.clear()
+	for npc in get_tree().get_nodes_in_group("NPC"):
+		GlobalGameState.npcs[npc.name] = {
+			"scene_path": "res://Scenes/BadNPC.tscn",
+			"position": npc.global_position
+			
+	}
+
+	var scene_path: String
 	match battle_type:
 		BattleType.TIMED_TYPING:
 			scene_path = timed_typing_scene
