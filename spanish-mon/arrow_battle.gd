@@ -10,7 +10,6 @@ class_name ArrowBattle
 @onready var sfx_winBattle = $sfx_winBattle
 @onready var sfx_loseBattle = $sfx_loseBattle
 
-
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
 	$Hearts/Heart2,
@@ -54,12 +53,12 @@ const ARROW_SYMBOLS := {
 	"right": "→"
 }
 
-const ARROW_COLORS := {
-	"up": "#4a9eff",
-	"down": "#ff4a4a",
-	"left": "#9d4aff",
-	"right": "#4aff4a"
-}
+# randomize color
+func random_color() -> String:
+	var c := Color.from_hsv(randf(), 1.0, 1.0) 
+	return c.to_html(false)  
+
+
 
 func _ready() -> void:
 	hearts = max_hearts
@@ -78,6 +77,7 @@ func _ready() -> void:
 	_update_round_label()
 	_start_round()
 
+
 func _process(delta: float) -> void:
 	if current_state == BattleState.WAITING_FOR_INPUT and battle_active:
 		time_remaining -= delta
@@ -85,6 +85,7 @@ func _process(delta: float) -> void:
 		
 		if time_remaining <= 0.0:
 			_wrong_input()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not battle_active or current_state != BattleState.WAITING_FOR_INPUT:
@@ -107,12 +108,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if arrow != "":
 			_handle_arrow_input(arrow)
 
+
 func _start_round() -> void:
 	current_state = BattleState.SHOWING_SEQUENCE
 	player_sequence.clear()
 	sequence_index = 0
 	
-	# Generate sequence
 	var seq_length := starting_sequence_length + (current_round - 1)
 	sequence = _generate_sequence(seq_length)
 	
@@ -120,11 +121,11 @@ func _start_round() -> void:
 	player_input_label.text = ""
 	npc_sequence_label.text = ""
 	
-	
 	show_timer.wait_time = 0.6
 	show_timer.start()
 	sequence_index = 0
 	_show_next_arrow()
+
 
 func _generate_sequence(length: int) -> Array[String]:
 	var arrows := ["up", "down", "left", "right"]
@@ -135,24 +136,26 @@ func _generate_sequence(length: int) -> Array[String]:
 	
 	return result
 
+
 func _show_next_arrow() -> void:
 	if sequence_index >= sequence.size():
-		
 		show_timer.stop()
 		await get_tree().create_timer(0.5).timeout
 		_start_player_input()
 		return
 	
 	var arrow := sequence[sequence_index]
-	var symbol := ARROW_SYMBOLS[arrow] as String
-	var color := ARROW_COLORS[arrow] as String
+	var symbol: String = ARROW_SYMBOLS[arrow]
 	
+	var color := random_color() 
 	
 	npc_sequence_label.text = "[center][color=%s][font_size=72]%s[/font_size][/color][/center]" % [color, symbol]
 	sequence_index += 1
 
+
 func _on_show_timer_timeout() -> void:
 	_show_next_arrow()
+
 
 func _start_player_input() -> void:
 	current_state = BattleState.WAITING_FOR_INPUT
@@ -164,13 +167,13 @@ func _start_player_input() -> void:
 	_update_timer_label()
 	_update_player_input_display()
 
+
 func _handle_arrow_input(arrow: String) -> void:
 	if player_sequence.size() >= sequence.size():
 		return
 	
 	player_sequence.append(arrow)
 	
-	# Check if arrow matches
 	var index := player_sequence.size() - 1
 	if arrow != sequence[index]:
 		_wrong_input()
@@ -181,20 +184,22 @@ func _handle_arrow_input(arrow: String) -> void:
 	if player_sequence.size() == sequence.size():
 		_correct_sequence()
 
+
 func _update_player_input_display() -> void:
 	var bb := "[center]Your input: "
 	
 	for i in range(sequence.size()):
 		if i < player_sequence.size():
 			var arrow := player_sequence[i]
-			var symbol := ARROW_SYMBOLS[arrow] as String
-			var color := ARROW_COLORS[arrow] as String
+			var symbol: String =  ARROW_SYMBOLS[arrow]
+			var color := random_color()  
 			bb += "[color=%s]%s[/color] " % [color, symbol]
 		else:
 			bb += "[color=#666666]?[/color] "
 	
 	bb += "[/center]"
 	player_input_label.text = bb
+
 
 func _correct_sequence() -> void:
 	current_state = BattleState.BETWEEN_ROUNDS
@@ -210,6 +215,7 @@ func _correct_sequence() -> void:
 	else:
 		_start_round()
 
+
 func _wrong_input() -> void:
 	_lose_heart()
 	sfx_loseHeart.play()
@@ -221,24 +227,28 @@ func _wrong_input() -> void:
 		await get_tree().create_timer(1.5).timeout
 		_start_player_input()
 
+
 func _update_timer_label() -> void:
 	timer_label.text = "Time: %.1f" % max(0.0, time_remaining)
 
+
 func _update_round_label() -> void:
 	round_label.text = "Round: %d/%d" % [min(current_round, rounds_to_win), rounds_to_win]
+
 
 func _update_hearts() -> void:
 	hearts = clamp(hearts, 0, max_hearts)
 	for i in range(heart_icons.size()):
 		heart_icons[i].texture = FULL_HEART if i < hearts else EMPTY_HEART
 
+
 func _lose_heart() -> void:
 	hearts -= 1
 	_update_hearts()
 	
-	
 	if hearts <= 0:
 		_on_player_loses()
+
 
 func _on_player_wins() -> void:
 	current_state = BattleState.BATTLE_WON
@@ -248,10 +258,9 @@ func _on_player_wins() -> void:
 	player_input_label.text = "[center][color=#00ff00]You mastered the dance![/color]\n[color=#ffff00]Ship Piece Acquired![/color][/center]"
 	npc_sequence_label.text = ""
 	
-	# TODO: Add the ship piece to inventory here
-	
 	await get_tree().create_timer(2.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
+
 
 func _on_player_loses() -> void:
 	current_state = BattleState.BATTLE_LOST
