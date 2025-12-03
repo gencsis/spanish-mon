@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7ebxxtqunpk0"]
+
+[ext_resource type="Script" uid="uid://p36b0tnxol2n" path="res://arrow_battle.gd" id="1_2vkpa"]
+
+[node name="ArrowBattle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2vkpa")
+
+[node name="InstructionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 112.0
+offset_right = 43.0
+offset_bottom = 128.0
+
+[node name="NPCSequenceLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 7.0
+offset_right = 175.0
+offset_bottom = 23.0
+bbcode_enabled = true
+fit_content = true
+
+[node name="TextBox" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_top = 131.0
+offset_right = 320.0
+offset_bottom = 181.0
+
+[node name="InputLabel" type="RichTextLabel" parent="TextBox"]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 89.0
+offset_right = 268.0
+offset_bottom = 105.0
+
+[node name="RoundLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 114.0
+offset_right = 268.0
+offset_bottom = 130.0
+
+[node name="Hearts" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+
+[node name="Heart" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+
+[node name="ArrowDisplay" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 33.0
+offset_right = 59.0
+offset_bottom = 73.0
