@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cslv8pjoxeqtw"]
+
+[ext_resource type="Script" uid="uid://vknsahka8p3t" path="res://screen_dialogue.gd" id="1_mjvdy"]
+[ext_resource type="Texture2D" uid="uid://bdq4syw0fgw1e" path="res://Assets/UI/dialouge_bubble.png" id="2_tomeq"]
+
+[node name="ScreenDialogue" type="CanvasLayer"]
+script = ExtResource("1_mjvdy")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(320, 40)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Bubble" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tomeq")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="Control/Bubble"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 316.0
+offset_bottom = 44.0
+autowrap_mode = 3

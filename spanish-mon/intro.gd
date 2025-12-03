@@ -20,6 +20,8 @@ var frames = [
 ]
 
 func _ready() -> void:
+	GlobalGameState.reset_game()
+	
 	image.texture = frames[0]
 	_viewport_adjustments()
 	anim.play("intro")

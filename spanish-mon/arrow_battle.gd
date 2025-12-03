@@ -7,7 +7,6 @@ class_name ArrowBattle
 @onready var timer_label: Label = $TimeLabel
 @onready var round_label: Label = $RoundLabel
 
-
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
 	$Hearts/Heart2,
@@ -36,6 +35,7 @@ var current_round: int = 1
 var sequence: Array[String] = []
 var player_sequence: Array[String] = []
 var sequence_index: int = 0
+var sequence_colors: Array[String] = []
 
 var max_hearts: int = 3
 var hearts: int = 3
@@ -51,15 +51,21 @@ const ARROW_SYMBOLS := {
 	"right": "→"
 }
 
-const ARROW_COLORS := {
-	"up": "#4a9eff",
-	"down": "#ff4a4a",
-	"left": "#9d4aff",
-	"right": "#4aff4a"
-}
+const COLOR_PALETTE : Array[String] = [
+	"#4a9eff", # blue
+	"#ff4a4a", # red
+	"#9d4aff", # purple
+	"#4aff4a", # green
+	"#ffd94a", # yellow
+	"#ff7ae6"  # pink
+]
+
 
 func _ready() -> void:
-	hearts = max_hearts
+	randomize()
+	
+	hearts = GlobalGameState.get_current_health()
+	max_hearts = GlobalGameState.player_max_health
 	_update_hearts()
 	battle_active = true
 	
@@ -108,15 +114,14 @@ func _start_round() -> void:
 	current_state = BattleState.SHOWING_SEQUENCE
 	player_sequence.clear()
 	sequence_index = 0
+	sequence_colors.clear()
 	
-	# Generate sequence
 	var seq_length := starting_sequence_length + (current_round - 1)
 	sequence = _generate_sequence(seq_length)
 	
 	instruction_label.text = "Watch carefully..."
 	player_input_label.text = ""
 	npc_sequence_label.text = ""
-	
 	
 	show_timer.wait_time = 0.6
 	show_timer.start()
@@ -126,15 +131,18 @@ func _start_round() -> void:
 func _generate_sequence(length: int) -> Array[String]:
 	var arrows := ["up", "down", "left", "right"]
 	var result: Array[String] = []
+	sequence_colors.clear()
 	
 	for i in range(length):
 		result.append(arrows[randi() % arrows.size()])
-	
+		
+		var color:= COLOR_PALETTE[randi() % COLOR_PALETTE.size()]
+		sequence_colors.append(color)
+		
 	return result
 
 func _show_next_arrow() -> void:
 	if sequence_index >= sequence.size():
-		
 		show_timer.stop()
 		await get_tree().create_timer(0.5).timeout
 		_start_player_input()
@@ -142,10 +150,10 @@ func _show_next_arrow() -> void:
 	
 	var arrow := sequence[sequence_index]
 	var symbol := ARROW_SYMBOLS[arrow] as String
-	var color := ARROW_COLORS[arrow] as String
+	var color := sequence_colors[sequence_index]
 	
-	
-	npc_sequence_label.text = "[center][color=%s][font_size=72]%s[/font_size][/color][/center]" % [color, symbol]
+	npc_sequence_label.text = "[center][color=%s][font_size=72]%s[/font_size][/color][/center]" \
+	% [color, symbol]
 	sequence_index += 1
 
 func _on_show_timer_timeout() -> void:
@@ -167,7 +175,6 @@ func _handle_arrow_input(arrow: String) -> void:
 	
 	player_sequence.append(arrow)
 	
-	# Check if arrow matches
 	var index := player_sequence.size() - 1
 	if arrow != sequence[index]:
 		_wrong_input()
@@ -185,7 +192,7 @@ func _update_player_input_display() -> void:
 		if i < player_sequence.size():
 			var arrow := player_sequence[i]
 			var symbol := ARROW_SYMBOLS[arrow] as String
-			var color := ARROW_COLORS[arrow] as String
+			var color := sequence_colors[i]
 			bb += "[color=%s]%s[/color] " % [color, symbol]
 		else:
 			bb += "[color=#666666]?[/color] "
@@ -230,8 +237,10 @@ func _update_hearts() -> void:
 
 func _lose_heart() -> void:
 	hearts -= 1
-	_update_hearts()
 	
+	GlobalGameState.lose_health(1)
+	
+	_update_hearts()
 	
 	if hearts <= 0:
 		_on_player_loses()
@@ -243,10 +252,15 @@ func _on_player_wins() -> void:
 	player_input_label.text = "[center][color=#00ff00]You mastered the dance![/color]\n[color=#ffff00]Ship Piece Acquired![/color][/center]"
 	npc_sequence_label.text = ""
 	
-	# TODO: Add the ship piece to inventory here
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
+	
+	if GlobalGameState.current_battle_npc == "zenith":
+		GlobalGameState.collect_ship_piece("piece_two")
 	
 	await get_tree().create_timer(2.5).timeout
-	get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
 
 func _on_player_loses() -> void:
 	current_state = BattleState.BATTLE_LOST
@@ -254,6 +268,10 @@ func _on_player_loses() -> void:
 	instruction_label.text = "Defeated!"
 	player_input_label.text = "[center][color=#ff5555]You couldn't keep up with the dance...[/color][/center]"
 	npc_sequence_label.text = ""
+
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
 	
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")

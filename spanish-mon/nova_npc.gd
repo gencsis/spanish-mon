@@ -1,0 +1,71 @@
+extends StaticBody2D
+class_name NovaNPC
+
+@onready var area: Area2D = $Area2D
+@onready var screen_dialogue: CanvasLayer = get_node("/root/GameLevel/ScreenDialogue")
+@onready var typing_choice: TypingChoice2D = $TypingChoice
+
+var has_talked: bool = false
+
+func _ready() -> void:
+	area.body_entered.connect(_on_area_body_entered)
+	area.body_exited.connect(_on_area_body_exited)
+	
+	if typing_choice:
+		typing_choice.choice_completed.connect(_on_talk_chosen)
+	
+	if screen_dialogue:
+		screen_dialogue.hide_dialogue()
+
+func _on_area_body_entered(body: Node) -> void:
+	if body.is_in_group("player") and not has_talked:
+		if typing_choice:
+			typing_choice.options = ["talk"]
+			typing_choice.start_choices()
+
+func _on_area_body_exited(body: Node) -> void:
+	if body.is_in_group("player"):
+		if typing_choice:
+			typing_choice.stop_choices()
+		if screen_dialogue:
+			screen_dialogue.hide_dialogue()
+		has_talked = false
+
+func _on_talk_chosen(index: int, word: String) -> void:
+	if word.to_lower() == "talk":
+		has_talked = true
+		
+		if GlobalGameState.has_piece_two:
+			_show_already_beaten_message()
+		else:
+			_show_dialogue_then_battle()
+
+func _show_already_beaten_message() -> void:
+	if screen_dialogue:
+		screen_dialogue.show_text("You sure have a smart brain! Here's your ship part back and good luck going back home!")
+	
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("set_can_move"):
+		player.set_can_move(true)
+
+func _show_dialogue_then_battle() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("set_can_move"):
+		player.set_can_move(false)
+	
+	if screen_dialogue:
+		screen_dialogue.show_text("You said you need the piece of metal next to me??")
+	await get_tree().create_timer(1.5).timeout
+	
+	if screen_dialogue:
+		screen_dialogue.show_text("How about you guess my riddles and only after that I will let you take it back!")
+	await get_tree().create_timer(2.0).timeout
+	
+	#GlobalGameState.collect_ship_piece("piece_two")
+	
+	call_deferred("_start_battle")
+
+func _start_battle() -> void:
+	if get_tree():
+		GlobalGameState.set_battle_context("nova", "")
+		get_tree().change_scene_to_file("res://unscramble_battle.tscn")

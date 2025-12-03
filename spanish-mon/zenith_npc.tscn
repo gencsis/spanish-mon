@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1jfm63e3uxfo"]
+
+[ext_resource type="Script" uid="uid://dc77nb2q2wccr" path="res://zenith_npc.gd" id="1_h8vh3"]
+[ext_resource type="Texture2D" uid="uid://5c6khupf5hjr" path="res://Assets/TEMP_CHARACTERS/white_cat.png" id="2_64f5g"]
+[ext_resource type="PackedScene" uid="uid://c0ma0hs0xhfhc" path="res://typing_choice.tscn" id="3_b06v1"]
+[ext_resource type="PackedScene" uid="uid://d0rfuodnnvpci" path="res://dialouge_bubble.tscn" id="4_yd453"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8vh3"]
+size = Vector2(14, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_64f5g"]
+radius = 15.508062
+
+[node name="ZenithNPC" type="StaticBody2D"]
+script = ExtResource("1_h8vh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_h8vh3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_64f5g")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.5, -0.5)
+shape = SubResource("CircleShape2D_64f5g")
+
+[node name="TypingChoice" parent="." instance=ExtResource("3_b06v1")]
+options = Array[String](["grab"])
+
+[node name="DialogueBubble" parent="." instance=ExtResource("4_yd453")]
+position = Vector2(11, -31)

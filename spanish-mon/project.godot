@@ -15,6 +15,10 @@ run/main_scene="uid://b3e742gy4tbn6"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalGameState="*res://global_game_state.gd"
+
 [display]
 
 window/size/viewport_width=320
@@ -23,6 +27,7 @@ window/size/initial_position_type=0
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cydwfi5q6dael"]
+[gd_scene load_steps=12 format=3 uid="uid://cydwfi5q6dael"]
 
 [ext_resource type="Script" uid="uid://cnja17o8ifej2" path="res://typing_battle.gd" id="1_w8d88"]
-[ext_resource type="Texture2D" uid="uid://co4cxm4u35bfa" path="res://Assets/TEMP_CHARACTERS/ORIONSpriteSheet.png" id="2_2pfjb"]
+[ext_resource type="Texture2D" uid="uid://y5iv8kd75vnb" path="res://Assets/backgrounds/typing_battle_background.png" id="2_71a7u"]
+[ext_resource type="Texture2D" uid="uid://caer14ly6jph8" path="res://Assets/TEMP_CHARACTERS/cat.png" id="2_nidej"]
 [ext_resource type="Texture2D" uid="uid://cvtneu22c40wh" path="res://Assets/player/player_animations.png" id="3_1pvpm"]
+[ext_resource type="Texture2D" uid="uid://dvvu0gqbcygtc" path="res://Assets/TEMP_CHARACTERS/blue_cat.png" id="3_71a7u"]
 [ext_resource type="Texture2D" uid="uid://ce4vvfotmw5q5" path="res://Assets/UI/hearts_one1.png" id="4_lrt2h"]
 [ext_resource type="AudioStream" uid="uid://bh6ieatokk4n0" path="res://Assets/Music/8bit_Sword Fight.mp3" id="5_2pfjb"]
 [ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="6_1pvpm"]
@@ -19,38 +21,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w8d88")
+orion_texture = ExtResource("2_nidej")
+aurora_texture = ExtResource("3_71a7u")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 321.0
+offset_bottom = 166.0
+texture = ExtResource("2_71a7u")
 
 [node name="Enemy" type="Sprite2D" parent="."]
-position = Vector2(295, 25)
-texture = ExtResource("2_2pfjb")
-hframes = 4
-vframes = 6
+position = Vector2(262, 26)
+scale = Vector2(2.382, 2)
+texture = ExtResource("3_71a7u")
 
 [node name="Player" type="Sprite2D" parent="."]
-position = Vector2(21, 85)
+position = Vector2(66.87501, 77.875)
+scale = Vector2(2.863, 2)
 texture = ExtResource("3_1pvpm")
 hframes = 4
 vframes = 8
 
 [node name="Hearts" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 244.99779
+offset_bottom = 62.035446
+scale = Vector2(0.5510254, 0.5803134)
+theme_override_constants/separation = 4
 
 [node name="Heart" type="TextureRect" parent="Hearts"]
 layout_mode = 2
 texture = ExtResource("4_lrt2h")
-stretch_mode = 3
+expand_mode = 3
 
 [node name="Heart2" type="TextureRect" parent="Hearts"]
 layout_mode = 2
 texture = ExtResource("4_lrt2h")
-stretch_mode = 3
+expand_mode = 3
 
 [node name="Heart3" type="TextureRect" parent="Hearts"]
 layout_mode = 2
 texture = ExtResource("4_lrt2h")
-stretch_mode = 3
+expand_mode = 3
 
 [node name="TextBox" type="TextureRect" parent="."]
 layout_mode = 1
@@ -65,10 +77,11 @@ texture = SubResource("CanvasTexture_2mp46")
 
 [node name="SentenceLabel" type="RichTextLabel" parent="TextBox"]
 layout_mode = 0
-offset_left = 8.0
+offset_left = 7.0
 offset_top = 13.0
-offset_right = 311.0
+offset_right = 310.0
 offset_bottom = 53.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 2

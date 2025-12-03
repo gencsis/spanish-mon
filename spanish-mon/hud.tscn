@@ -134,3 +134,11 @@ stretch_mode = 3
 [node name="EatWord" parent="Root" instance=ExtResource("4_640wx")]
 position = Vector2(0, -28)
 options = Array[String](["eat", ""])
+
+[node name="PiecesLabel" type="Label" parent="Root"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 24.0
+offset_right = 338.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 13

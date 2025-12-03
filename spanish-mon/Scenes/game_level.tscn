@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://bi4wclvswufcf"]
+[gd_scene load_steps=70 format=4 uid="uid://bi4wclvswufcf"]
 
 [ext_resource type="Script" uid="uid://gfxuuxgjam2d" path="res://Scripts/game_level.gd" id="1_1m3u1"]
 [ext_resource type="PackedScene" uid="uid://dlv27mevwhteg" path="res://Characters/player_axol.tscn" id="2_nbrg5"]
@@ -28,6 +28,10 @@
 [ext_resource type="Texture2D" uid="uid://b46slqgtewbjh" path="res://Assets/TILESET/Extras/steps.png" id="19_qo105"]
 [ext_resource type="Texture2D" uid="uid://bfhptpqxyx0pc" path="res://Assets/TILESET/Extras/bridge.png" id="22_aphk7"]
 [ext_resource type="Texture2D" uid="uid://dymviox5yabyb" path="res://Assets/TILESET/Basic Plants.png" id="22_qo105"]
+[ext_resource type="PackedScene" uid="uid://b1jfm63e3uxfo" path="res://zenith_npc.tscn" id="27_gwcls"]
+[ext_resource type="PackedScene" uid="uid://b12efvhscb3h4" path="res://nova_npc.tscn" id="29_ojrno"]
+[ext_resource type="PackedScene" uid="uid://8v0ra4mk20di" path="res://aurora_npc.tscn" id="30_c3347"]
+[ext_resource type="PackedScene" uid="uid://cslv8pjoxeqtw" path="res://screen_dialogue.tscn" id="32_c3347"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3xx2"]
 texture = ExtResource("9_11ucq")
@@ -966,14 +970,26 @@ move_speed = 75.0
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Sign" parent="Characters" instance=ExtResource("3_acj1n")]
-position = Vector2(19, -47)
+position = Vector2(-47, -77)
 
 [node name="Worm" parent="Characters" instance=ExtResource("4_1m3u1")]
 z_index = 0
-position = Vector2(69, -2)
+position = Vector2(70, 9)
 
 [node name="Worm2" parent="Characters" instance=ExtResource("4_1m3u1")]
 position = Vector2(-91, 30)
+
+[node name="ZenithNPC" parent="Characters" instance=ExtResource("27_gwcls")]
+position = Vector2(309, 17)
+
+[node name="OrionNPC" parent="Characters" instance=ExtResource("11_mxr21")]
+position = Vector2(32, -57)
+
+[node name="NovaNPC" parent="Characters" instance=ExtResource("29_ojrno")]
+position = Vector2(396, -13)
+
+[node name="AuroraNPC" parent="Characters" instance=ExtResource("30_c3347")]
+position = Vector2(295, -78)
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 
@@ -1014,18 +1030,9 @@ stream = ExtResource("14_fr8xg")
 
 [node name="HUD" parent="." instance=ExtResource("10_e38tf")]
 
-[node name="NPC" parent="." instance=ExtResource("11_mxr21")]
-position = Vector2(35, 47)
-
-[node name="BadNPC - A" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(388, -5)
-battle_type = 2
-
-[node name="BadNPC - S" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(305, -64)
-battle_type = 1
-
 [node name="BadNPC" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(320, 14)
+position = Vector2(358, 53)
+
+[node name="ScreenDialogue" parent="." instance=ExtResource("32_c3347")]
 
 [connection signal="finished" from="Music" to="." method="_on_audio_stream_player_finished"]
