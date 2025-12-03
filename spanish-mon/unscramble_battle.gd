@@ -4,6 +4,9 @@ class_name UnscrambleBattle
 @onready var instruction_label: Label = $InstructionLabel
 @onready var scrambled_label: RichTextLabel = $Textbox/ScrambledLabel
 @onready var timer_label: Label = $TimeLabel
+@onready var sfx_loseHeart = $sfx_loseHeart
+@onready var sfx_winBattle = $sfx_winBattle
+@onready var sfx_loseBattle = $sfx_loseBattle
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -151,6 +154,7 @@ func _lose_heart() -> void:
 	GlobalGameState.lose_health(1)
 	
 	_update_hearts()
+	sfx_loseHeart.play()
 	
 	if hearts <= 0:
 		_on_player_loses()
@@ -181,6 +185,7 @@ func _check_answer() -> void:
 
 func _on_player_wins() -> void:
 	battle_active = false
+	sfx_winBattle.play()
 	scrambled_label.text = "[center][color=#00ff00]Correct! You got the ship piece![/color][/center]"
 	instruction_label.text = "Ship Piece Acquired!"
 	
@@ -197,6 +202,7 @@ func _on_player_wins() -> void:
 
 func _on_player_loses() -> void:
 	battle_active = false
+	sfx_loseBattle.play()
 	scrambled_label.text = "[center][color=#ff5555]You failed to unscramble the word...[/color][/center]"
 	instruction_label.text = "Mission Failed"
 

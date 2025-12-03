@@ -26,7 +26,7 @@ extends CanvasLayer
 ]
 
 @onready var pieces_label: Label = $Root/PiecesLabel
-
+@onready var sfx_gainHeart = $sfx_gainHeart
 @onready var eat_word: TypingChoice2D = $Root/EatWord
 
 const WORM_ICON = preload("res://Assets/UI/worm-inventory.png")
@@ -97,6 +97,7 @@ func _update_hearts_display() -> void:
 			
 func increase_hearts(amount: int) -> void:
 	GlobalGameState.gain_health(amount)
+	sfx_gainHeart.play()
 
 func update_pieces_display() -> void:
 	if pieces_label:

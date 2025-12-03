@@ -7,6 +7,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vkpa"]
 bg_color = Color(1, 1, 1, 1)
+[ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="2_n1bj0"]
+[ext_resource type="AudioStream" uid="uid://bma2hgxeojfoy" path="res://Assets/Music/8bit_Pull The Trigger.mp3" id="3_xeri7"]
+[ext_resource type="AudioStream" uid="uid://ddqcbp20p0ki1" path="res://Assets/Music/mixkit-winning-swoosh-2017.mp3" id="4_70v6o"]
+[ext_resource type="AudioStream" uid="uid://3s6nidjfewj7" path="res://Assets/Music/mixkit-losing-bleeps-2026 (1).mp3" id="5_wxgxe"]
 
 [node name="ArrowBattle" type="Control"]
 layout_mode = 3
@@ -102,3 +106,20 @@ offset_left = 19.0
 offset_top = 33.0
 offset_right = 59.0
 offset_bottom = 73.0
+
+[node name="sfx_loseHeart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_n1bj0")
+volume_db = -2.0
+
+[node name="BattleMusic_Arrow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xeri7")
+volume_db = -7.0
+autoplay = true
+
+[node name="sfx_winBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_70v6o")
+volume_db = -5.0
+
+[node name="sfx_loseBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wxgxe")
+volume_db = -5.0
