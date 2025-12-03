@@ -6,7 +6,7 @@ class_name TypingBattle
 @onready var timer_label: Label = $TimeLabel
 @onready var sfx_loseHeart = $sfx_loseHeart
 @onready var sfx_winBattle = $sfx_winBattle
-@onready var sfx_lostBattle = $sfx_lostBattle
+@onready var sfx_loseBattle = $sfx_loseBattle
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -174,7 +174,7 @@ func _on_enemy_wins() -> void:
 	enemy_timer.stop()
 	sentence_label.text = "[color=#ff5555]You lost the battle...[/color]"
 	_update_timer_label()
-	sfx_lostBattle.play()
+	sfx_loseBattle.play()
 	
 	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")

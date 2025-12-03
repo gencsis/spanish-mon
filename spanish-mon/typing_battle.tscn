@@ -97,6 +97,6 @@ volume_db = -2.0
 stream = ExtResource("7_lrt2h")
 volume_db = -5.0
 
-[node name="sfx_lostBattle" type="AudioStreamPlayer" parent="."]
+[node name="sfx_loseBattle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_2mp46")
 volume_db = -5.0

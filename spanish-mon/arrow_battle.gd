@@ -6,6 +6,9 @@ class_name ArrowBattle
 @onready var player_input_label: RichTextLabel = $TextBox/InputLabel
 @onready var timer_label: Label = $TimeLabel
 @onready var round_label: Label = $RoundLabel
+@onready var sfx_loseHeart = $sfx_loseHeart
+@onready var sfx_winBattle = $sfx_winBattle
+@onready var sfx_loseBattle = $sfx_loseBattle
 
 
 @onready var heart_icons: Array[TextureRect] = [
@@ -209,6 +212,7 @@ func _correct_sequence() -> void:
 
 func _wrong_input() -> void:
 	_lose_heart()
+	sfx_loseHeart.play()
 	
 	if hearts > 0:
 		instruction_label.text = "Wrong! Try again..."
@@ -239,6 +243,7 @@ func _lose_heart() -> void:
 func _on_player_wins() -> void:
 	current_state = BattleState.BATTLE_WON
 	battle_active = false
+	sfx_winBattle.play()
 	instruction_label.text = "Victory!"
 	player_input_label.text = "[center][color=#00ff00]You mastered the dance![/color]\n[color=#ffff00]Ship Piece Acquired![/color][/center]"
 	npc_sequence_label.text = ""
@@ -251,6 +256,7 @@ func _on_player_wins() -> void:
 func _on_player_loses() -> void:
 	current_state = BattleState.BATTLE_LOST
 	battle_active = false
+	sfx_loseBattle.play()
 	instruction_label.text = "Defeated!"
 	player_input_label.text = "[center][color=#ff5555]You couldn't keep up with the dance...[/color][/center]"
 	npc_sequence_label.text = ""

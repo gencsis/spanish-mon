@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhtl0uyvhw6u0"]
+[gd_scene load_steps=6 format=3 uid="uid://dhtl0uyvhw6u0"]
 
 [ext_resource type="Script" uid="uid://c0svoe4uvhvit" path="res://unscramble_battle.gd" id="1_aih2y"]
+[ext_resource type="AudioStream" uid="uid://riwdvxdln1m" path="res://Assets/Music/8bit_Let's do this!.mp3" id="2_dhrt7"]
+[ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="3_a8uah"]
+[ext_resource type="AudioStream" uid="uid://ddqcbp20p0ki1" path="res://Assets/Music/mixkit-winning-swoosh-2017.mp3" id="4_mbbnl"]
+[ext_resource type="AudioStream" uid="uid://3s6nidjfewj7" path="res://Assets/Music/mixkit-losing-bleeps-2026 (1).mp3" id="5_5dfju"]
 
 [node name="UnscrambleBattle" type="Control"]
 layout_mode = 3
@@ -48,3 +52,20 @@ layout_mode = 2
 
 [node name="Heart3" type="TextureRect" parent="Hearts"]
 layout_mode = 2
+
+[node name="BattleMusic_Unscramble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dhrt7")
+volume_db = -7.0
+autoplay = true
+
+[node name="sfx_loseHeart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a8uah")
+volume_db = -2.0
+
+[node name="sfx_winBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mbbnl")
+volume_db = -5.0
+
+[node name="sfx_loseBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5dfju")
+volume_db = -5.0
