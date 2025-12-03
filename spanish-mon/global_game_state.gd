@@ -59,8 +59,7 @@ func collect_ship_piece(piece_name: String) -> void:
 
 func _check_all_pieces() -> void:
 	if ship_pieces_collected >= TOTAL_SHIP_PIECES:
-		all_pieces_collected.emit()
-		print("All pieces collected!")
+		get_tree().change_scene_to_file("res://Scenes/end_menu.tscn")
 
 func reset_game() -> void:
 	"""Call this when starting a NEW game (from main menu)"""

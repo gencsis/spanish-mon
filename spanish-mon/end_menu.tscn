@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsveuib1qp3tb"]
+
+[ext_resource type="Script" uid="uid://echdn0qyhmhp" path="res://end_menu.gd" id="1_8alk7"]
+[ext_resource type="Texture2D" uid="uid://8jv8nejhfa7v" path="res://Assets/backgrounds/end_screen.png" id="1_tnunr"]
+
+[node name="EndMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8alk7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 179.0
+texture = ExtResource("1_tnunr")
+
+[node name="Buttons" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Options" type="VBoxContainer" parent="Buttons"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Buttons/Options"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Buttons/Options"]
+layout_mode = 2
