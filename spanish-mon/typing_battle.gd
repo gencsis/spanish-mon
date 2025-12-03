@@ -4,9 +4,10 @@ class_name TypingBattle
 @onready var sentence_label: RichTextLabel = $TextBox/SentenceLabel
 @onready var enemy_timer: Timer = $EnemyTimer
 @onready var timer_label: Label = $TimeLabel
+@onready var enemy_sprite: Sprite2D = $Enemy
 @onready var sfx_loseHeart = $sfx_loseHeart
 @onready var sfx_winBattle = $sfx_winBattle
-@onready var sfx_lostBattle = $sfx_lostBattle
+@onready var sfx_loseBattle = $sfx_loseBattle
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -14,9 +15,11 @@ class_name TypingBattle
 	$Hearts/Heart3,
 ]
 
-# TODO: change these to your actual paths
 const FULL_HEART  = preload("res://Assets/UI/hearts_one1.png")
 const EMPTY_HEART = preload("res://Assets/UI/hearts_one2.png")
+
+@export var orion_texture: Texture2D
+@export var aurora_texture: Texture2D
 
 @export_multiline var sentence: String = "wild creature appeared type this fast"
 
@@ -27,17 +30,37 @@ var battle_active: bool = true
 var max_hearts: int = 3
 var hearts: int = 3
 
-const PLAYER_TYPED_COLOR := "#ffffff"
-const PLAYER_REMAIN_COLOR := "#000000"
-const CURRENT_CHAR_COLOR := "#2E6F40"   # highlighted letter
+
+const PLAYER_TYPED_COLOR := "#4CAF50"     
+const PLAYER_REMAIN_COLOR := "#1a1a1a"   
+const CURRENT_CHAR_COLOR := "#FFD700" 
 
 func _ready() -> void:
 	player_index = 0
 	enemy_index = 0
 	battle_active = true
 
-	hearts = max_hearts
+	hearts = GlobalGameState.get_current_health()
+	max_hearts = GlobalGameState.player_max_health
 	_update_hearts()
+	
+	if GlobalGameState.current_battle_npc == "orion":
+		sentence = "The enemies you come across will have typing battles like these."
+		enemy_timer.wait_time = 0.8
+		if orion_texture and enemy_sprite:
+			enemy_sprite.texture = orion_texture
+			
+	elif GlobalGameState.current_battle_npc == "aurora":
+		sentence = "For some crazy reason, the medic didn't consider a lack of milk for my cereal as an emergency."
+		enemy_timer.wait_time = 0.3
+		if aurora_texture and enemy_sprite:
+			enemy_sprite.texture = aurora_texture
+			
+	elif GlobalGameState.current_battle_sentence != "":
+		sentence = GlobalGameState.current_battle_sentence
+		enemy_timer.wait_time = 0.5
+		if aurora_texture and enemy_sprite:
+			enemy_sprite.texture = aurora_texture
 
 	_update_sentence_label()
 	_update_timer_label()
@@ -53,28 +76,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.unicode != 0:
 		var ch := char(event.unicode)
 		_handle_player_char(ch)
-		
-	#code if you want arrow keys as typing inputs
-	#if event is InputEventKey and event.pressed:
-		#var e:= event as InputEventKey
-		#match e.keycode:
-			#KEY_UP:
-				#_handle_player_char("↑")
-				#return
-			#KEY_DOWN:
-				#_handle_player_char("↓")
-				#return
-			#KEY_LEFT:
-				#_handle_player_char("←")
-				#return
-			#KEY_RIGHT:
-				#_handle_player_char("→")
-				#return
-		#if e.unicode != 0:
-			#var ch := char(e.unicode)
-			#_handle_player_char(ch)
-		
-		
 
 
 func _handle_player_char(ch: String) -> void:
@@ -105,8 +106,6 @@ func _on_enemy_timer_timeout() -> void:
 			_on_enemy_wins()
 
 
-
-
 func _update_sentence_label() -> void:
 	var len := sentence.length()
 	var typed_count = clamp(player_index, 0, len)
@@ -122,15 +121,12 @@ func _update_sentence_label() -> void:
 
 	var bb := ""
 
-	# already typed letters
 	if not before.is_empty():
 		bb += "[color=%s]%s[/color]" % [PLAYER_TYPED_COLOR, before]
 
-	# current letter – highlighted + underlined
 	if not current_char.is_empty():
 		bb += "[color=%s][u]%s[/u][/color]" % [CURRENT_CHAR_COLOR, current_char]
 
-	# remaining
 	if not after.is_empty():
 		bb += "[color=%s]%s[/color]" % [PLAYER_REMAIN_COLOR, after]
 
@@ -138,7 +134,6 @@ func _update_sentence_label() -> void:
 
 
 func _update_timer_label() -> void:
-	# Time left until the enemy finishes, based on its progress & speed
 	var remaining_chars := sentence.length() - enemy_index
 	var time_left = max(0.0, float(remaining_chars) * enemy_timer.wait_time)
 	timer_label.text = "Time: %.1f" % time_left
@@ -151,6 +146,9 @@ func _update_hearts() -> void:
 
 func _lose_heart() -> void:
 	hearts -= 1
+	
+	GlobalGameState.lose_health(1)
+	
 	_update_hearts()
 	sfx_loseHeart.play()
 	
@@ -161,12 +159,22 @@ func _lose_heart() -> void:
 func _on_player_wins() -> void:
 	battle_active = false
 	enemy_timer.stop()
-	sentence_label.text = "[color=#ffffff]You won the battle![/color]"
+	sentence_label.text = "[color=#00ff00]You won the battle![/color]"
 	_update_timer_label()
 	sfx_winBattle.play()
 	
+	if GlobalGameState.current_battle_npc == "aurora":
+		GlobalGameState.collect_ship_piece("piece_one")
+
+	if GlobalGameState.current_battle_npc == "random":
+		pass
+	
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
+	
 	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
 
 
 func _on_enemy_wins() -> void:
@@ -174,7 +182,11 @@ func _on_enemy_wins() -> void:
 	enemy_timer.stop()
 	sentence_label.text = "[color=#ff5555]You lost the battle...[/color]"
 	_update_timer_label()
-	sfx_lostBattle.play()
+	sfx_loseBattle.play()
+	
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
 	
 	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")

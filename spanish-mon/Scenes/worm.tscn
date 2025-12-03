@@ -63,7 +63,7 @@ _data = {
 size = Vector2(10, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n80vc"]
-radius = 16.0
+radius = 11.045361
 
 [node name="Worm" type="StaticBody2D"]
 z_index = 6
@@ -84,7 +84,7 @@ libraries = {
 shape = SubResource("RectangleShape2D_cgdv7")
 
 [node name="TypingChoice" parent="." instance=ExtResource("3_n80vc")]
-position = Vector2(-20, -50)
+position = Vector2(-25, -49)
 
 [node name="Area2D" type="Area2D" parent="."]
 

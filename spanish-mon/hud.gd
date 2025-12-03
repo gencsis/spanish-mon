@@ -1,8 +1,6 @@
 class_name HUD
 extends CanvasLayer
 
-
-
 @onready var slot_bg: Array[TextureRect] = [
 	$Root/InventoryGrid/Slot1/Inventory1,
 	$Root/InventoryGrid/Slot2/Inventory2,
@@ -27,8 +25,8 @@ extends CanvasLayer
 	$Root/InventoryGrid/Slot3/H_Inventory3,
 ]
 
-
-
+@onready var pieces_label: Label = $Root/PiecesLabel
+@onready var sfx_gainHeart = $sfx_gainHeart
 @onready var eat_word: TypingChoice2D = $Root/EatWord
 
 const WORM_ICON = preload("res://Assets/UI/worm-inventory.png")
@@ -41,7 +39,7 @@ var bag_open: bool = false
 var selected_slot: int = 0
 
 var max_hearts: int = 3
-var current_hearts: int = 2
+var current_hearts: int = 3
 
 var slot_items: Array[String] = ["", "", ""]
 
@@ -60,7 +58,9 @@ func add_item_to_inventory(item_id: String) -> bool:
 	return false
 
 func _ready() -> void:
-	set_hearts(current_hearts)
+	sync_hearts_from_global()
+	
+	GlobalGameState.health_changed.connect(_on_health_changed)
 	
 	for i in range(slot_bg.size()):
 		slot_bg[i].texture = EMPTY_SLOT
@@ -74,8 +74,21 @@ func _ready() -> void:
 	eat_word.visible = false
 	eat_word.choice_completed.connect(_on_eat_word_completed)
 	
+	update_pieces_display()
+
+func sync_hearts_from_global() -> void:
+	current_hearts = GlobalGameState.get_current_health()
+	_update_hearts_display()
+
+func _on_health_changed(new_health: int) -> void:
+	current_hearts = new_health
+	_update_hearts_display()
+
 func set_hearts(count: int) -> void:
-	current_hearts = clamp(count, 0, max_hearts)
+	GlobalGameState.player_current_health = clamp(count, 0, max_hearts)
+	GlobalGameState.health_changed.emit(GlobalGameState.player_current_health)
+	
+func _update_hearts_display() -> void:
 	for i in range(heart_icons.size()):
 		if i < current_hearts:
 			heart_icons[i].texture = FULL_HEART
@@ -83,10 +96,20 @@ func set_hearts(count: int) -> void:
 			heart_icons[i].texture = EMPTY_HEART
 			
 func increase_hearts(amount: int) -> void:
-	set_hearts(current_hearts + amount)
+	GlobalGameState.gain_health(amount)
+	sfx_gainHeart.play()
+
+func update_pieces_display() -> void:
+	if pieces_label:
+		pieces_label.text = "Ship Pieces: %d/%d" % [
+			GlobalGameState.ship_pieces_collected,
+			GlobalGameState.TOTAL_SHIP_PIECES
+		]
+
+func _process(delta: float) -> void:
+	update_pieces_display()
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Open/use bag with Z
 	if event.is_action_pressed("bag"):
 		if bag_open:
 			_close_bag()

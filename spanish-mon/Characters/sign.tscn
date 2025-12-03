@@ -12,7 +12,7 @@ atlas = ExtResource("1_qv2il")
 region = Rect2(0, 0, 16, 15)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1mfp"]
-radius = 18.0
+radius = 13.0
 
 [node name="Sign" type="StaticBody2D"]
 script = ExtResource("1_r1mfp")
@@ -24,8 +24,7 @@ shape = SubResource("RectangleShape2D_rlhpn")
 texture = SubResource("AtlasTexture_r1mfp")
 
 [node name="TypingChoice" parent="." instance=ExtResource("3_r1mfp")]
-position = Vector2(-20, -37)
-options = Array[String](["read"])
+position = Vector2(-17, -36)
 
 [node name="Area2D" type="Area2D" parent="."]
 

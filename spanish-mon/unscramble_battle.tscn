@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhtl0uyvhw6u0"]
+[gd_scene load_steps=6 format=3 uid="uid://dhtl0uyvhw6u0"]
 
 [ext_resource type="Script" uid="uid://c0svoe4uvhvit" path="res://unscramble_battle.gd" id="1_aih2y"]
+[ext_resource type="AudioStream" uid="uid://riwdvxdln1m" path="res://Assets/Music/8bit_Let's do this!.mp3" id="2_dhrt7"]
+[ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="3_a8uah"]
+[ext_resource type="AudioStream" uid="uid://ddqcbp20p0ki1" path="res://Assets/Music/mixkit-winning-swoosh-2017.mp3" id="4_mbbnl"]
+[ext_resource type="AudioStream" uid="uid://3s6nidjfewj7" path="res://Assets/Music/mixkit-losing-bleeps-2026 (1).mp3" id="5_5dfju"]
+[ext_resource type="Texture2D" uid="uid://baoyagel0wfnw" path="res://Assets/backgrounds/unscramble_background.png" id="2_a8uah"]
+[ext_resource type="Texture2D" uid="uid://bg5er0ffcel3n" path="res://Assets/TEMP_CHARACTERS/grey_cat.png" id="3_mbbnl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_aih2y"]
 
 [node name="UnscrambleBattle" type="Control"]
 layout_mode = 3
@@ -9,42 +17,67 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_aih2y")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 319.0
+offset_bottom = 183.0
+texture = ExtResource("2_a8uah")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(155, 52.000004)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_mbbnl")
+
 [node name="InstructionLabel" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 16.0
+offset_left = 2.0
+offset_top = 96.0
+offset_right = 42.0
+offset_bottom = 112.0
+text = "Unscramble this word to get the ship piece!"
 
 [node name="TimeLabel" type="Label" parent="."]
 layout_mode = 0
-offset_top = 20.0
-offset_right = 206.23999
-offset_bottom = 36.0
+offset_left = 247.0
+offset_top = 2.0
+offset_right = 316.0
+offset_bottom = 18.0
+text = "Time: 0.0"
 
-[node name="Textbox" type="PanelContainer" parent="."]
+[node name="Textbox" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 6.446
 anchor_bottom = 3.1490002
-offset_top = 80.0
+offset_top = 114.0
 offset_right = 62.160004
 offset_bottom = 54.039993
+texture = SubResource("CanvasTexture_aih2y")
 
 [node name="ScrambledLabel" type="RichTextLabel" parent="Textbox"]
-layout_mode = 2
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 307.0
+offset_bottom = 59.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2
 
 [node name="Hearts" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 243.0
-offset_top = 9.0
-offset_right = 283.0
-offset_bottom = 49.0
+offset_right = 103.0
+offset_bottom = 33.0
 
 [node name="Heart" type="TextureRect" parent="Hearts"]
 layout_mode = 2
+expand_mode = 3
 
 [node name="Heart2" type="TextureRect" parent="Hearts"]
 layout_mode = 2
+expand_mode = 3
 
 [node name="Heart3" type="TextureRect" parent="Hearts"]
 layout_mode = 2

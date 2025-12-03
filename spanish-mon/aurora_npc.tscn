@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://8v0ra4mk20di"]
+
+[ext_resource type="Script" uid="uid://cf2usclaaijnl" path="res://aurora_npc.gd" id="1_nhhkd"]
+[ext_resource type="Texture2D" uid="uid://dvvu0gqbcygtc" path="res://Assets/TEMP_CHARACTERS/blue_cat.png" id="2_1n4km"]
+[ext_resource type="PackedScene" uid="uid://c0ma0hs0xhfhc" path="res://typing_choice.tscn" id="3_e41nl"]
+[ext_resource type="PackedScene" uid="uid://d0rfuodnnvpci" path="res://dialouge_bubble.tscn" id="4_tu12v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isjw0"]
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fo4ev"]
+radius = 14.035668
+
+[node name="AuroraNPC" type="StaticBody2D"]
+script = ExtResource("1_nhhkd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_isjw0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1n4km")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fo4ev")
+
+[node name="TypingChoice" parent="." instance=ExtResource("3_e41nl")]
+position = Vector2(17, -29)
+options = Array[String](["grab"])
+
+[node name="DialogueBubble" parent="." instance=ExtResource("4_tu12v")]
+position = Vector2(9, -36)

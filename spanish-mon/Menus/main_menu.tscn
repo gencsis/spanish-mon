@@ -69,7 +69,7 @@ offset_right = 45.0
 offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Type-Shi"
+text = "Cosmic Keys"
 label_settings = SubResource("LabelSettings_fu7sn")
 horizontal_alignment = 1
 
@@ -78,3 +78,13 @@ stream = ExtResource("4_11gta")
 volume_db = -5.0
 autoplay = true
 script = SubResource("GDScript_11gta")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 140.0
+offset_right = 103.0
+offset_bottom = 175.0
+theme_override_font_sizes/font_size = 14
+text = "Type \"start\" 
+to begin!"

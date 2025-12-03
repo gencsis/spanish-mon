@@ -14,8 +14,8 @@ var selected_index: int = 0
 var typed_counts: Array[int] = []
 var active: bool = false
 
-var typed_color: String = "#ffffff"
-var remaining_color: String = "#000000"
+var typed_color: String = "#000000"
+var remaining_color: String = "#ffffff"
 
 
 func _ready() -> void:
@@ -27,7 +27,6 @@ func _ready() -> void:
 	for i in range(options.size()):
 		typed_counts.append(0)
 
-	# hide unused labels if only 1 option
 	for i in range(option_labels.size()):
 		option_labels[i].visible = i < options.size()
 
@@ -37,7 +36,6 @@ func _ready() -> void:
 
 
 func start_choices() -> void:
-	
 	selected_index = 0
 	for i in range(typed_counts.size()):
 		typed_counts[i] = 0
@@ -46,14 +44,18 @@ func start_choices() -> void:
 	visible = true
 	set_process_input(true)
 	_update_labels()
-	get_tree().call_group("player", "set_can_move", false)
+	
+	if get_tree():
+		get_tree().call_group("player", "set_can_move", false)
 
 
 func stop_choices() -> void:
 	active = false
 	visible = false
 	set_process_input(false)
-	get_tree().call_group("player", "set_can_move", true)
+	
+	if get_tree():
+		get_tree().call_group("player", "set_can_move", true)
 
 
 func _input(event: InputEvent) -> void:
@@ -63,7 +65,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		var e = event as InputEventKey
 
-		
 		if e.keycode == KEY_ESCAPE:
 			stop_choices()
 			return
@@ -110,9 +111,6 @@ func _handle_char(ch: String) -> void:
 		if typed_counts[selected_index] >= lower_word.length():
 			choice_completed.emit(selected_index, word)
 			stop_choices() 
-	else:
-		
-		pass
 
 
 func _update_labels() -> void:
@@ -144,15 +142,13 @@ func _format_word(word: String, typed_count: int, is_selected: bool) -> String:
 
 	return bbcode
 
-func set_word(new_word: String) -> void:
-	
-	options = [new_word]
 
+func set_word(new_word: String) -> void:
+	options = [new_word]
 	
 	typed_counts.clear()
 	for i in range(options.size()):
 		typed_counts.append(0)
-
 	
 	for i in range(option_labels.size()):
 		option_labels[i].visible = i < options.size()

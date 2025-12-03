@@ -4,6 +4,9 @@ class_name UnscrambleBattle
 @onready var instruction_label: Label = $InstructionLabel
 @onready var scrambled_label: RichTextLabel = $Textbox/ScrambledLabel
 @onready var timer_label: Label = $TimeLabel
+@onready var sfx_loseHeart = $sfx_loseHeart
+@onready var sfx_winBattle = $sfx_winBattle
+@onready var sfx_loseBattle = $sfx_loseBattle
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -14,9 +17,7 @@ class_name UnscrambleBattle
 const FULL_HEART  = preload("res://Assets/UI/hearts_one1.png")
 const EMPTY_HEART = preload("res://Assets/UI/hearts_one2.png")
 
-# unscrambled word
 @export var word_list: Array[String] = ["apple", "pineapple", "peach"]
-
 @export var battle_timer: float = 30.0
 
 var target_word: String = ""
@@ -31,12 +32,13 @@ var hearts: int = 3
 var current_round: int = 0
 var total_rounds: int = 3
 
-const TYPED_COLOR := "#ffffff"
+const TYPED_COLOR := "#000000"
 const REMAINING_COLOR := "#888888"
 const CURRENT_CHAR_COLOR := "#2E6F40"
 
 func _ready() -> void:
-	hearts = max_hearts
+	hearts = GlobalGameState.get_current_health()
+	max_hearts = GlobalGameState.player_max_health
 	_update_hearts()
 	
 	total_rounds = word_list.size()
@@ -54,7 +56,7 @@ func _start_round() -> void:
 	battle_active = true
 	time_remaining = battle_timer
 	
-	instruction_label.text = "Unscramble this word to get the ship piece! (Round %d/%d)" \
+	instruction_label.text = "Unscramble this word! (Round %d/%d)" \
 	% [current_round + 1, total_rounds]
 	
 	_update_scrambled_label()
@@ -103,7 +105,6 @@ func _scramble_word(word: String) -> String:
 	for i in range(word.length()):
 		chars.append(word[i])
 	
-	# Fisher-Yates shuffle (from: https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/
 	for i in range(chars.size() - 1, 0, -1):
 		var j := randi() % (i + 1)
 		var temp = chars[i]
@@ -114,7 +115,6 @@ func _scramble_word(word: String) -> String:
 	for c in chars:
 		result += c
 	
-	# Make sure it's actually scrambled
 	if result == word and word.length() > 1:
 		return _scramble_word(word)
 	
@@ -150,8 +150,11 @@ func _update_hearts() -> void:
 
 func _lose_heart() -> void:
 	hearts -= 1
-	_update_hearts()
 	
+	GlobalGameState.lose_health(1)
+	
+	_update_hearts()
+	sfx_loseHeart.play()
 	
 	if hearts <= 0:
 		_on_player_loses()
@@ -170,34 +173,54 @@ func _check_answer() -> void:
 			await get_tree().create_timer(1.0).timeout
 			_start_round()
 	else:
+		scrambled_label.text = "[center][color=#ff5555]Wrong! Try again.[/color][/center]"
+		
 		_lose_heart()
 		
 		if hearts > 0:
+			await get_tree().create_timer(1.0).timeout
 			player_input = ""
+			battle_active = true
 			_update_scrambled_label()
 
 func _on_player_wins() -> void:
 	battle_active = false
+	sfx_winBattle.play()
 	scrambled_label.text = "[center][color=#00ff00]Correct! You got the ship piece![/color][/center]"
 	instruction_label.text = "Ship Piece Acquired!"
 	
-	# TODO: Add the ship piece to inventory here
+
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
 	
+	if GlobalGameState.current_battle_npc == "nova":
+		GlobalGameState.collect_ship_piece("piece_two")
+		
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
 
 func _on_player_loses() -> void:
 	battle_active = false
+	sfx_loseBattle.play()
 	scrambled_label.text = "[center][color=#ff5555]You failed to unscramble the word...[/color][/center]"
 	instruction_label.text = "Mission Failed"
+
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
 	
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 
 func _on_time_runs_out() -> void:
 	battle_active = false
 	scrambled_label.text = "[center][color=#ff5555]Time's up![/color][/center]"
 	instruction_label.text = "Out of Time"
 	
+	GlobalGameState.current_battle_npc = ""
+	GlobalGameState.current_battle_sentence = ""
+	
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	if get_tree():
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
