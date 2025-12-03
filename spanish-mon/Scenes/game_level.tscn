@@ -1030,18 +1030,9 @@ stream = ExtResource("14_fr8xg")
 
 [node name="HUD" parent="." instance=ExtResource("10_e38tf")]
 
-[node name="NPC" parent="." instance=ExtResource("11_mxr21")]
-position = Vector2(35, 47)
-
-[node name="BadNPC - A" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(452, -60)
-battle_type = 2
-
-[node name="BadNPC - S" parent="." instance=ExtResource("12_fwnm2")]
-position = Vector2(298, -72)
-battle_type = 1
-
 [node name="BadNPC" parent="." instance=ExtResource("12_fwnm2")]
 position = Vector2(388, 31)
+
+[node name="ScreenDialogue" parent="." instance=ExtResource("32_c3347")]
 
 [connection signal="finished" from="Music" to="." method="_on_audio_stream_player_finished"]

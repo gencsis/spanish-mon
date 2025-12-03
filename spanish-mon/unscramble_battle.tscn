@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhtl0uyvhw6u0"]
+[gd_scene load_steps=9 format=3 uid="uid://dhtl0uyvhw6u0"]
 
 [ext_resource type="Script" uid="uid://c0svoe4uvhvit" path="res://unscramble_battle.gd" id="1_aih2y"]
+[ext_resource type="Texture2D" uid="uid://baoyagel0wfnw" path="res://Assets/backgrounds/unscramble_background.png" id="2_a8uah"]
 [ext_resource type="AudioStream" uid="uid://riwdvxdln1m" path="res://Assets/Music/8bit_Let's do this!.mp3" id="2_dhrt7"]
 [ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="3_a8uah"]
+[ext_resource type="Texture2D" uid="uid://bg5er0ffcel3n" path="res://Assets/TEMP_CHARACTERS/grey_cat.png" id="3_mbbnl"]
 [ext_resource type="AudioStream" uid="uid://ddqcbp20p0ki1" path="res://Assets/Music/mixkit-winning-swoosh-2017.mp3" id="4_mbbnl"]
 [ext_resource type="AudioStream" uid="uid://3s6nidjfewj7" path="res://Assets/Music/mixkit-losing-bleeps-2026 (1).mp3" id="5_5dfju"]
-[ext_resource type="Texture2D" uid="uid://baoyagel0wfnw" path="res://Assets/backgrounds/unscramble_background.png" id="2_a8uah"]
-[ext_resource type="Texture2D" uid="uid://bg5er0ffcel3n" path="res://Assets/TEMP_CHARACTERS/grey_cat.png" id="3_mbbnl"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_aih2y"]
 
@@ -82,7 +82,19 @@ expand_mode = 3
 [node name="Heart3" type="TextureRect" parent="Hearts"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="BattleMusic_Unscramble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_dhrt7")
+
+[node name="sfx_loseHeart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_a8uah")
+
+[node name="sfx_winBattle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mbbnl")
+
+[node name="sfx_loseBattle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5dfju")

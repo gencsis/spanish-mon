@@ -7,13 +7,13 @@ class_name BadNPC
 @onready var typing_choice: TypingChoice2D = $TypingChoice
 
 enum BattleType {
-	TIMED_TYPING,   
+	TIMED_TYPING,
 	WORD_UNSCRAMBLE,
 	ARROW_SEQUENCE
 }
 
 @export var battle_type: BattleType = BattleType.TIMED_TYPING
-@export var dialogue_duration: float = 2.0 
+@export var dialogue_duration: float = 2.0
 @export var npc_unique_id: String = ""
 
 @export var sentence_pool: Array[String] = [
@@ -27,7 +27,6 @@ enum BattleType {
 @export_multiline var pre_battle_dialogue: String = ""
 @export_multiline var after_battle_dialogue: String = "[You already beat me!]"
 
-
 @export_file("*.tscn") var timed_typing_scene: String = "res://typing_battle.tscn"
 @export_file("*.tscn") var unscramble_scene: String = "res://unscramble_battle.tscn"
 @export_file("*.tscn") var arrow_battle_scene: String = "res://arrow_battle.tscn"
@@ -35,28 +34,33 @@ enum BattleType {
 var has_triggered: bool = false
 var chosen_sentence: String = ""
 var is_defeated: bool = false
+var scene_path: String = ""
+
 
 func _ready() -> void:
 	area.body_entered.connect(_on_area_body_entered)
 	area.body_exited.connect(_on_area_body_exited)
-	
+
 	if typing_choice:
 		typing_choice.choice_completed.connect(_on_talk_chosen)
-	
+
 	if bubble:
 		bubble.hide_bubble()
 
+	# Start invisible unless logic below says otherwise
 	if sprite:
 		sprite.visible = false
-	
+
+	# Check defeat state from global game state
 	if npc_unique_id != "":
 		is_defeated = GlobalGameState.is_npc_defeated(npc_unique_id)
 		if is_defeated:
-			
+			# NPC already beaten – keep them visible but they won't start a new battle
 			if sprite:
 				sprite.visible = true
-	
+
 	_choose_random_sentence()
+
 
 func _choose_random_sentence() -> void:
 	if pre_battle_dialogue != "":
@@ -66,28 +70,41 @@ func _choose_random_sentence() -> void:
 	else:
 		chosen_sentence = "[The quick brown fox jumps over the lazy dog.]"
 
+
 func _on_area_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		_start_battle()
-		
-func _start_battle() -> void:
-	var player = get_tree().current_scene.get_node("Characters/PlayerAxol")
-	GlobalGameState.player_position = player.global_position + Vector2(0, 20)
-	if body.is_in_group("player") and not has_triggered:
+	if not body.is_in_group("player"):
+		return
 
-		if sprite:
-			sprite.visible = true
+	_start_interaction()
 
-		if is_defeated:
-			_show_already_defeated_message()
-			return
 
-		if typing_choice:
-			typing_choice.options = ["talk"]
-			typing_choice.start_choices()
+func _start_interaction() -> void:
+	# Save player position so we can return them after the battle
+	var player := get_tree().get_first_node_in_group("player")
+	if player:
+		GlobalGameState.player_position = player.global_position + Vector2(0, 20)
+
+	if has_triggered:
+		return
+
+	if sprite:
+		sprite.visible = true
+
+	if is_defeated:
+		_show_already_defeated_message()
+		return
+
+	# Show the "talk" choice
+	if typing_choice:
+		typing_choice.options = ["talk"]
+		typing_choice.start_choices()
+
 
 func _on_area_body_exited(body: Node) -> void:
-	if body.is_in_group("player") and not has_triggered:
+	if not body.is_in_group("player"):
+		return
+
+	if not has_triggered:
 		if typing_choice:
 			typing_choice.stop_choices()
 		if bubble:
@@ -96,52 +113,44 @@ func _on_area_body_exited(body: Node) -> void:
 		if not is_defeated and sprite:
 			sprite.visible = false
 
+
 func _on_talk_chosen(index: int, word: String) -> void:
-	if word.to_lower() == "talk":
-		if is_defeated:
-			_show_already_defeated_message()
-		else:
-			has_triggered = true
-			_show_dialogue_then_battle()
+	if word.to_lower() != "talk":
+		return
+
+	if is_defeated:
+		_show_already_defeated_message()
+	else:
+		has_triggered = true
+		_show_dialogue_then_battle()
+
 
 func _show_already_defeated_message() -> void:
 	if bubble:
 		bubble.show_text(after_battle_dialogue)
-	
-	var player = get_tree().get_first_node_in_group("player")
+
+	var player := get_tree().get_first_node_in_group("player")
 	if player and player.has_method("set_can_move"):
 		player.set_can_move(true)
 
+
 func _show_dialogue_then_battle() -> void:
-	var player = get_tree().get_first_node_in_group("player")
+	var player := get_tree().get_first_node_in_group("player")
 	if player:
 		GlobalGameState.save_player_position(player.global_position)
 		if player.has_method("set_can_move"):
 			player.set_can_move(false)
-	
+
 	if bubble and chosen_sentence != "":
 		bubble.show_text(chosen_sentence)
 		await get_tree().create_timer(dialogue_duration).timeout
-	
+
+	# Mark this NPC as defeated so they don't re-trigger battles
 	if npc_unique_id != "":
 		GlobalGameState.mark_npc_defeated(npc_unique_id)
-	
-	call_deferred("_start_battle")
 
-func _start_battle() -> void:
-	if not get_tree():
-		return
-		
-	var scene_path: String
-	
-	 # Save all NPCs
-	GlobalGameState.npcs.clear()
-	for npc in get_tree().get_nodes_in_group("NPC"):
-		GlobalGameState.npcs[npc.name] = {
-			"scene_path": "res://Scenes/BadNPC.tscn",
-			"position": npc.global_position
-			
-	}
+	# Decide which battle scene to load and set context
+	scene_path = ""
 
 	match battle_type:
 		BattleType.TIMED_TYPING:
@@ -153,11 +162,10 @@ func _start_battle() -> void:
 		BattleType.ARROW_SEQUENCE:
 			scene_path = arrow_battle_scene
 			GlobalGameState.set_battle_context("random_arrow", "")
-	
-	if scene_path and scene_path != "":
+
+	if scene_path != "":
 		get_tree().change_scene_to_file(scene_path)
 	else:
 		push_error("Not a valid battle type: ", battle_type)
-		var player = get_tree().get_first_node_in_group("player")
 		if player and player.has_method("set_can_move"):
 			player.set_can_move(true)
