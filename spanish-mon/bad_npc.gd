@@ -27,6 +27,7 @@ enum BattleType {
 @export_multiline var pre_battle_dialogue: String = ""
 @export_multiline var after_battle_dialogue: String = "[You already beat me!]"
 
+
 @export_file("*.tscn") var timed_typing_scene: String = "res://typing_battle.tscn"
 @export_file("*.tscn") var unscramble_scene: String = "res://unscramble_battle.tscn"
 @export_file("*.tscn") var arrow_battle_scene: String = "res://arrow_battle.tscn"
@@ -66,6 +67,12 @@ func _choose_random_sentence() -> void:
 		chosen_sentence = "[The quick brown fox jumps over the lazy dog.]"
 
 func _on_area_body_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		_start_battle()
+		
+func _start_battle() -> void:
+	var player = get_tree().current_scene.get_node("Characters/PlayerAxol")
+	GlobalGameState.player_position = player.global_position + Vector2(0, 20)
 	if body.is_in_group("player") and not has_triggered:
 
 		if sprite:
@@ -127,6 +134,15 @@ func _start_battle() -> void:
 		
 	var scene_path: String
 	
+	 # Save all NPCs
+	GlobalGameState.npcs.clear()
+	for npc in get_tree().get_nodes_in_group("NPC"):
+		GlobalGameState.npcs[npc.name] = {
+			"scene_path": "res://Scenes/BadNPC.tscn",
+			"position": npc.global_position
+			
+	}
+
 	match battle_type:
 		BattleType.TIMED_TYPING:
 			scene_path = timed_typing_scene

@@ -10,6 +10,12 @@ extends CharacterBody2D
 
 func _ready():
 	update_animation_parameters(starting_direction)
+	
+	# Restore last position if continue game
+	if GlobalGameState.player_position != Vector2.ZERO:
+		global_position = GlobalGameState.player_position + Vector2(0, 40)
+	else:
+		global_position = starting_direction
 
 func _physics_process(_delta):
 	
