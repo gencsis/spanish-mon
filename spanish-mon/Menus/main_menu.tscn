@@ -73,7 +73,7 @@ text = "Type-Shi"
 label_settings = SubResource("LabelSettings_fu7sn")
 horizontal_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Title_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_11gta")
 volume_db = -5.0
 autoplay = true
