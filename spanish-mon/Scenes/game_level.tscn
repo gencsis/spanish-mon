@@ -1195,24 +1195,17 @@ remote_path = NodePath("../../../Camera2D")
 [node name="Sign" parent="Characters" instance=ExtResource("3_acj1n")]
 position = Vector2(-47, -77)
 
-[node name="Worm" parent="Characters" instance=ExtResource("4_1m3u1")]
-z_index = 0
-position = Vector2(70, 9)
-
-[node name="Worm2" parent="Characters" instance=ExtResource("4_1m3u1")]
-position = Vector2(-91, 30)
-
 [node name="ZenithNPC" parent="Characters" instance=ExtResource("27_gwcls")]
-position = Vector2(309, 17)
+position = Vector2(943, 521)
 
 [node name="OrionNPC" parent="Characters" instance=ExtResource("11_mxr21")]
 position = Vector2(32, -57)
 
 [node name="NovaNPC" parent="Characters" instance=ExtResource("29_ojrno")]
-position = Vector2(396, -13)
+position = Vector2(1177, 43)
 
 [node name="AuroraNPC" parent="Characters" instance=ExtResource("30_c3347")]
-position = Vector2(295, -78)
+position = Vector2(462, -538)
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 
@@ -1254,8 +1247,66 @@ stream = ExtResource("14_fr8xg")
 [node name="HUD" parent="." instance=ExtResource("10_e38tf")]
 
 [node name="BadNPC" parent="." instance=ExtResource("12_fwnm2")]
+visible = false
 position = Vector2(388, 31)
 
 [node name="ScreenDialogue" parent="." instance=ExtResource("32_c3347")]
+
+[node name="worms" type="Node2D" parent="."]
+
+[node name="Worm" parent="worms" instance=ExtResource("4_1m3u1")]
+z_index = 0
+position = Vector2(70, 9)
+
+[node name="Worm2" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(-91, 30)
+
+[node name="Worm3" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(137, 408)
+
+[node name="Worm4" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(316, 359)
+
+[node name="Worm5" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(744, 487)
+
+[node name="Worm6" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(542, 393)
+
+[node name="Worm7" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(568, 596)
+
+[node name="Worm8" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(532, -67)
+
+[node name="Worm9" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(1129, 223)
+
+[node name="Worm10" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(992, 103)
+
+[node name="Worm11" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(1303, 96)
+
+[node name="Worm12" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(1098, 44)
+
+[node name="Worm13" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(1161, -225)
+
+[node name="Worm14" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(1214, -110)
+
+[node name="Worm15" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(632, -509)
+
+[node name="Worm16" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(549, 152)
+
+[node name="Worm17" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(327, -197)
+
+[node name="Worm18" parent="worms" instance=ExtResource("4_1m3u1")]
+position = Vector2(698, -185)
 
 [connection signal="finished" from="Music" to="." method="_on_audio_stream_player_finished"]
