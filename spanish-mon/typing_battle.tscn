@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cydwfi5q6dael"]
+[gd_scene load_steps=10 format=3 uid="uid://cydwfi5q6dael"]
 
 [ext_resource type="Script" uid="uid://cnja17o8ifej2" path="res://typing_battle.gd" id="1_w8d88"]
 [ext_resource type="Texture2D" uid="uid://co4cxm4u35bfa" path="res://Assets/TEMP_CHARACTERS/ORIONSpriteSheet.png" id="2_2pfjb"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ce4vvfotmw5q5" path="res://Assets/UI/hearts_one1.png" id="4_lrt2h"]
 [ext_resource type="AudioStream" uid="uid://bh6ieatokk4n0" path="res://Assets/Music/8bit_Sword Fight.mp3" id="5_2pfjb"]
 [ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="6_1pvpm"]
+[ext_resource type="AudioStream" uid="uid://ddqcbp20p0ki1" path="res://Assets/Music/mixkit-winning-swoosh-2017.mp3" id="7_lrt2h"]
+[ext_resource type="AudioStream" uid="uid://3s6nidjfewj7" path="res://Assets/Music/mixkit-losing-bleeps-2026 (1).mp3" id="8_2mp46"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2mp46"]
 
@@ -82,7 +84,7 @@ offset_right = 312.0
 offset_bottom = 111.0
 text = "Time: 0.0"
 
-[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+[node name="Battle_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_2pfjb")
 volume_db = -10.0
 autoplay = true
@@ -90,3 +92,11 @@ autoplay = true
 [node name="sfx_loseHeart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1pvpm")
 volume_db = -2.0
+
+[node name="sfx_winBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_lrt2h")
+volume_db = -5.0
+
+[node name="sfx_lostBattle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_2mp46")
+volume_db = -5.0
