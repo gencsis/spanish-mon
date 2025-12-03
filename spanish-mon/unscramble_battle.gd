@@ -4,7 +4,6 @@ class_name UnscrambleBattle
 @onready var instruction_label: Label = $InstructionLabel
 @onready var scrambled_label: RichTextLabel = $Textbox/ScrambledLabel
 @onready var timer_label: Label = $TimeLabel
-#@onready var sfx_loseHeart = $sfx_loseHeart
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -152,8 +151,7 @@ func _update_hearts() -> void:
 func _lose_heart() -> void:
 	hearts -= 1
 	_update_hearts()
-	#if sfx_loseHeart:
-		#sfx_loseHeart.play()
+	
 	
 	if hearts <= 0:
 		_on_player_loses()

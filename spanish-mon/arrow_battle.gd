@@ -6,7 +6,7 @@ class_name ArrowBattle
 @onready var player_input_label: RichTextLabel = $TextBox/InputLabel
 @onready var timer_label: Label = $TimeLabel
 @onready var round_label: Label = $RoundLabel
-#@onready var sfx_loseHeart = $sfx_loseHeart
+
 
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
@@ -231,8 +231,7 @@ func _update_hearts() -> void:
 func _lose_heart() -> void:
 	hearts -= 1
 	_update_hearts()
-	#if sfx_loseHeart:
-		# sfx_loseHeart.play()
+	
 	
 	if hearts <= 0:
 		_on_player_loses()
