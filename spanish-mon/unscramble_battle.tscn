@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhtl0uyvhw6u0"]
+
+[ext_resource type="Script" uid="uid://c0svoe4uvhvit" path="res://unscramble_battle.gd" id="1_aih2y"]
+
+[node name="UnscrambleBattle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_aih2y")
+
+[node name="InstructionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 16.0
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 206.23999
+offset_bottom = 36.0
+
+[node name="Textbox" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 6.446
+anchor_bottom = 3.1490002
+offset_top = 80.0
+offset_right = 62.160004
+offset_bottom = 54.039993
+
+[node name="ScrambledLabel" type="RichTextLabel" parent="Textbox"]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="Hearts" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 9.0
+offset_right = 283.0
+offset_bottom = 49.0
+
+[node name="Heart" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="Hearts"]
+layout_mode = 2
