@@ -14,16 +14,16 @@ offset_right = 320.0
 offset_bottom = 179.0
 texture = ExtResource("1_tnunr")
 
-[node name="Buttons" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = 2
+layout_mode = 1
+offset_left = 150.0
+offset_top = 78.0
+offset_right = 262.0
+offset_bottom = 118.0
 
-[node name="Options" type="VBoxContainer" parent="Buttons"]
+[node name="MessageLabel" type="RichTextLabel" parent="CenterContainer"]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Buttons/Options"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="Buttons/Options"]
-layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true

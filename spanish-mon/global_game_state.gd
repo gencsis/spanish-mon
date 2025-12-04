@@ -7,7 +7,6 @@ const TOTAL_SHIP_PIECES: int = 3
 var player_position: Vector2 = Vector2.ZERO
 
 # NPC states dictionary
-# Each entry: npc_name -> {scene_path, position, optional other states}
 var npcs := {}
 
 #tracking pieces
@@ -59,10 +58,10 @@ func collect_ship_piece(piece_name: String) -> void:
 
 func _check_all_pieces() -> void:
 	if ship_pieces_collected >= TOTAL_SHIP_PIECES:
-		get_tree().change_scene_to_file("res://Scenes/end_menu.tscn")
+		all_pieces_collected.emit()
+		print("All ship pieces collected! Return to your ship!")
 
 func reset_game() -> void:
-	"""Call this when starting a NEW game (from main menu)"""
 	ship_pieces_collected = 0
 	has_piece_one = false
 	has_piece_two = false

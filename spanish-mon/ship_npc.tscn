@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4n5mnpbxmku"]
+
+[ext_resource type="Script" uid="uid://bwhxmv5sx1x0u" path="res://ship_npc.gd" id="1_adead"]
+[ext_resource type="Texture2D" uid="uid://pjs00g4wpnpw" path="res://Assets/tiles/ufo.png" id="2_lumy7"]
+[ext_resource type="PackedScene" uid="uid://c0ma0hs0xhfhc" path="res://typing_choice.tscn" id="3_vmpya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4uv4"]
+size = Vector2(50, 27)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_12onc"]
+radius = 38.0
+
+[node name="ShipNPC" type="StaticBody2D"]
+script = ExtResource("1_adead")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lumy7")
+hframes = 4
+vframes = 4
+frame = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -2.5)
+shape = SubResource("RectangleShape2D_y4uv4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_12onc")
+
+[node name="TypingChoice" parent="." instance=ExtResource("3_vmpya")]

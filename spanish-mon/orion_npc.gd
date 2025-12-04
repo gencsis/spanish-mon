@@ -1,9 +1,6 @@
-extends StaticBody2D
+extends BaseNPC
 class_name OrionNPC
 
-@onready var area: Area2D = $Area2D
-@onready var screen_dialogue: ScreenDialogue = get_node("/root/GameLevel/ScreenDialogue")
-@onready var typing_choice: TypingChoice2D = $TypingChoice
 
 var intro_dialogues := [
 	"HELLO, I AM ORION!!!",
@@ -27,96 +24,27 @@ var post_tutorial_dialogues := [
 	"Good luck fixing your ship!"
 ]
 
+func _npc_ready() -> void:
+	pass
 
-func _ready() -> void:
-	area.body_entered.connect(_on_area_body_entered)
-	area.body_exited.connect(_on_area_body_exited)
-
-	if typing_choice:
-		typing_choice.choice_completed.connect(_on_talk_chosen)
-
-	if screen_dialogue:
-		screen_dialogue.hide_dialogue()
-
-
-func _on_area_body_entered(body: Node) -> void:
-	if not body.is_in_group("player"):
-		return
-
-	if typing_choice:
-		typing_choice.options = ["talk"]
-		typing_choice.start_choices()
-
-
-func _on_area_body_exited(body: Node) -> void:
-	if not body.is_in_group("player"):
-		return
-
-	if typing_choice:
-		typing_choice.stop_choices()
-	if screen_dialogue:
-		screen_dialogue.hide_dialogue()
-
-
-func _on_talk_chosen(index: int, word: String) -> void:
-	if word.to_lower() != "talk":
-		return
-
-	if GlobalGameState.is_npc_defeated("orion"):
-		await _play_post_tutorial_dialogue()
-	else:
-		await _play_intro_and_start_tutorial()
-
-
-func _set_player_can_move(can_move: bool) -> void:
-	var player := get_tree().get_first_node_in_group("player")
-	if player and player.has_method("set_can_move"):
-		player.set_can_move(can_move)
-
+func _handle_interaction(word: String) -> void:
+	if word == "talk":
+		if GlobalGameState.is_npc_defeated("orion"):
+			await _play_post_tutorial_dialogue()
+		else:
+			await _play_intro_and_start_tutorial()
 
 func _play_intro_and_start_tutorial() -> void:
-	_set_player_can_move(false)
-	if typing_choice:
-		typing_choice.stop_choices()
-
-	for line in intro_dialogues:
-		if screen_dialogue:
-			screen_dialogue.show_text(line)
-		await get_tree().create_timer(1.6).timeout
-
-	if screen_dialogue:
-		screen_dialogue.hide_dialogue()
-
+	await _play_dialogue_sequence(intro_dialogues, 1.6)
 	_start_tutorial_battle()
 
-
 func _play_post_tutorial_dialogue() -> void:
-	_set_player_can_move(false)
-	if typing_choice:
-		typing_choice.stop_choices()
-
-	for line in post_tutorial_dialogues:
-		if screen_dialogue:
-			screen_dialogue.show_text(line)
-		await get_tree().create_timer(1.6).timeout
-
-	if screen_dialogue:
-		screen_dialogue.hide_dialogue()
-
+	await _play_dialogue_sequence(post_tutorial_dialogues, 1.6)
 	_set_player_can_move(true)
 
-
 func _start_tutorial_battle() -> void:
-	if not get_tree():
-		return
-
-	var player := get_tree().get_first_node_in_group("player")
-	if player:
-		GlobalGameState.save_player_position(player.global_position)
-
-	GlobalGameState.set_battle_context(
+	_start_battle(
+		"res://typing_battle.tscn",
 		"orion",
 		"The enemies you come across will have typing battles like these."
 	)
-
-	get_tree().change_scene_to_file("res://typing_battle.tscn")

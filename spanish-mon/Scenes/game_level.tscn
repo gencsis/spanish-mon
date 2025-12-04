@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://bi4wclvswufcf"]
+[gd_scene load_steps=73 format=4 uid="uid://bi4wclvswufcf"]
 
 [ext_resource type="Script" uid="uid://gfxuuxgjam2d" path="res://Scripts/game_level.gd" id="1_1m3u1"]
 [ext_resource type="PackedScene" uid="uid://dlv27mevwhteg" path="res://Characters/player_axol.tscn" id="2_nbrg5"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://b12efvhscb3h4" path="res://nova_npc.tscn" id="29_ojrno"]
 [ext_resource type="PackedScene" uid="uid://8v0ra4mk20di" path="res://aurora_npc.tscn" id="30_c3347"]
 [ext_resource type="PackedScene" uid="uid://cslv8pjoxeqtw" path="res://screen_dialogue.tscn" id="32_c3347"]
+[ext_resource type="PackedScene" uid="uid://b4n5mnpbxmku" path="res://ship_npc.tscn" id="34_bwl8e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3xx2"]
 texture = ExtResource("9_11ucq")
@@ -1308,5 +1309,8 @@ position = Vector2(327, -197)
 
 [node name="Worm18" parent="worms" instance=ExtResource("4_1m3u1")]
 position = Vector2(698, -185)
+
+[node name="ShipNPC" parent="." instance=ExtResource("34_bwl8e")]
+position = Vector2(-96, -27)
 
 [connection signal="finished" from="Music" to="." method="_on_audio_stream_player_finished"]

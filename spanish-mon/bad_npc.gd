@@ -47,15 +47,12 @@ func _ready() -> void:
 	if bubble:
 		bubble.hide_bubble()
 
-	# Start invisible unless logic below says otherwise
 	if sprite:
 		sprite.visible = false
 
-	# Check defeat state from global game state
 	if npc_unique_id != "":
 		is_defeated = GlobalGameState.is_npc_defeated(npc_unique_id)
 		if is_defeated:
-			# NPC already beaten – keep them visible but they won't start a new battle
 			if sprite:
 				sprite.visible = true
 
@@ -79,7 +76,6 @@ func _on_area_body_entered(body: Node) -> void:
 
 
 func _start_interaction() -> void:
-	# Save player position so we can return them after the battle
 	var player := get_tree().get_first_node_in_group("player")
 	if player:
 		GlobalGameState.player_position = player.global_position + Vector2(0, 20)
@@ -94,7 +90,6 @@ func _start_interaction() -> void:
 		_show_already_defeated_message()
 		return
 
-	# Show the "talk" choice
 	if typing_choice:
 		typing_choice.options = ["talk"]
 		typing_choice.start_choices()
@@ -145,11 +140,9 @@ func _show_dialogue_then_battle() -> void:
 		bubble.show_text(chosen_sentence)
 		await get_tree().create_timer(dialogue_duration).timeout
 
-	# Mark this NPC as defeated so they don't re-trigger battles
 	if npc_unique_id != "":
 		GlobalGameState.mark_npc_defeated(npc_unique_id)
 
-	# Decide which battle scene to load and set context
 	scene_path = ""
 
 	match battle_type:

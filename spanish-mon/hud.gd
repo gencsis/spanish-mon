@@ -28,6 +28,8 @@ extends CanvasLayer
 @onready var pieces_label: Label = $Root/PiecesLabel
 @onready var sfx_gainHeart = $sfx_gainHeart
 @onready var eat_word: TypingChoice2D = $Root/EatWord
+@onready var notification_panel: Panel = $Notification
+@onready var notification_label: Label = $Notification/NotificationLabel
 
 const WORM_ICON = preload("res://Assets/UI/worm-inventory.png")
 const EMPTY_SLOT = preload("res://Assets/UI/single_inventory.png") 
@@ -61,6 +63,7 @@ func _ready() -> void:
 	sync_hearts_from_global()
 	
 	GlobalGameState.health_changed.connect(_on_health_changed)
+	GlobalGameState.all_pieces_collected.connect(_on_all_pieces_collected)
 	
 	for i in range(slot_bg.size()):
 		slot_bg[i].texture = EMPTY_SLOT
@@ -73,6 +76,9 @@ func _ready() -> void:
 
 	eat_word.visible = false
 	eat_word.choice_completed.connect(_on_eat_word_completed)
+	
+	if notification_panel:
+		notification_panel.visible = false
 	
 	update_pieces_display()
 
@@ -214,3 +220,12 @@ func _on_eat_word_completed(index: int, word: String) -> void:
 		if slot_items[selected_slot] == "worm":
 			_eat_worm_at_slot(selected_slot)
 	_close_bag()
+
+func _on_all_pieces_collected() -> void:
+	if notification_panel and notification_label:
+		notification_label.text = "YOU GOT ALL THE PARTS!\nNOW GO TO YOUR SHIP!"
+		notification_panel.visible = true
+		
+		await get_tree().create_timer(5.0).timeout
+		if notification_panel:
+			notification_panel.visible = false

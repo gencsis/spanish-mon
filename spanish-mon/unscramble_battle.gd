@@ -1,21 +1,9 @@
-extends Control
+extends BaseBattle
 class_name UnscrambleBattle
 
 @onready var instruction_label: Label = $InstructionLabel
 @onready var scrambled_label: RichTextLabel = $Textbox/ScrambledLabel
 @onready var timer_label: Label = $TimeLabel
-@onready var sfx_loseHeart = $sfx_loseHeart
-@onready var sfx_winBattle = $sfx_winBattle
-@onready var sfx_loseBattle = $sfx_loseBattle
-
-@onready var heart_icons: Array[TextureRect] = [
-	$Hearts/Heart,
-	$Hearts/Heart2,
-	$Hearts/Heart3,
-]
-
-const FULL_HEART  = preload("res://Assets/UI/hearts_one1.png")
-const EMPTY_HEART = preload("res://Assets/UI/hearts_one2.png")
 
 @export var word_list: Array[String] = ["apple", "pineapple", "peach"]
 @export var battle_timer: float = 30.0
@@ -23,11 +11,7 @@ const EMPTY_HEART = preload("res://Assets/UI/hearts_one2.png")
 var target_word: String = ""
 var scrambled_word: String = ""
 var player_input: String = ""
-var battle_active: bool = true
 var time_remaining: float = 0.0
-
-var max_hearts: int = 3
-var hearts: int = 3
 
 var current_round: int = 0
 var total_rounds: int = 3
@@ -37,9 +21,17 @@ const REMAINING_COLOR := "#888888"
 const CURRENT_CHAR_COLOR := "#2E6F40"
 
 func _ready() -> void:
-	hearts = GlobalGameState.get_current_health()
-	max_hearts = GlobalGameState.player_max_health
-	_update_hearts()
+	setup_heart_icons([
+		$Hearts/Heart,
+		$Hearts/Heart2,
+		$Hearts/Heart3,
+	])
+
+	sfx_loseHeart = $sfx_loseHeart
+	sfx_winBattle = $sfx_winBattle
+	sfx_loseBattle = $sfx_loseBattle
+	
+	super._ready()
 	
 	total_rounds = word_list.size()
 	current_round = 0
@@ -56,8 +48,7 @@ func _start_round() -> void:
 	battle_active = true
 	time_remaining = battle_timer
 	
-	instruction_label.text = "Unscramble this word! (Round %d/%d)" \
-	% [current_round + 1, total_rounds]
+	instruction_label.text = "Unscramble this word! (Round %d/%d)" % [current_round + 1, total_rounds]
 	
 	_update_scrambled_label()
 	_update_timer_label()
@@ -65,7 +56,7 @@ func _start_round() -> void:
 func _process(delta: float) -> void:
 	if not battle_active:
 		return
-		
+	
 	time_remaining -= delta
 	_update_timer_label()
 	
@@ -91,7 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if e.unicode != 0:
 			var ch := char(e.unicode).to_lower()
-
+			
 			if ch >= 'a' and ch <= 'z':
 				if player_input.length() < target_word.length():
 					player_input += ch
@@ -124,7 +115,6 @@ func _update_scrambled_label() -> void:
 	var bb := ""
 	
 	bb += "[center]Scrambled: [color=#ffaa00]%s[/color][/center]\n\n" % scrambled_word
-	
 	bb += "[center]Your answer: "
 	
 	if player_input.is_empty():
@@ -137,27 +127,10 @@ func _update_scrambled_label() -> void:
 			bb += "[color=%s]%s[/color]" % [REMAINING_COLOR, "_".repeat(remaining)]
 	
 	bb += "[/center]"
-	
 	scrambled_label.text = bb
 
 func _update_timer_label() -> void:
 	timer_label.text = "Time: %.1f" % max(0.0, time_remaining)
-
-func _update_hearts() -> void:
-	hearts = clamp(hearts, 0, max_hearts)
-	for i in range(heart_icons.size()):
-		heart_icons[i].texture = FULL_HEART if i < hearts else EMPTY_HEART
-
-func _lose_heart() -> void:
-	hearts -= 1
-	
-	GlobalGameState.lose_health(1)
-	
-	_update_hearts()
-	sfx_loseHeart.play()
-	
-	if hearts <= 0:
-		_on_player_loses()
 
 func _check_answer() -> void:
 	if player_input.to_lower() == target_word.to_lower():
@@ -174,7 +147,6 @@ func _check_answer() -> void:
 			_start_round()
 	else:
 		scrambled_label.text = "[center][color=#ff5555]Wrong! Try again.[/color][/center]"
-		
 		_lose_heart()
 		
 		if hearts > 0:
@@ -185,41 +157,14 @@ func _check_answer() -> void:
 
 func _on_player_wins() -> void:
 	battle_active = false
-	sfx_winBattle.play()
 	scrambled_label.text = "[center][color=#00ff00]Correct! You got the ship piece![/color][/center]"
 	instruction_label.text = "Ship Piece Acquired!"
-	
 
-	GlobalGameState.current_battle_npc = ""
-	GlobalGameState.current_battle_sentence = ""
-	
-	GlobalGameState.collect_ship_piece("piece_two")
-		
-	await get_tree().create_timer(2.0).timeout
-	if get_tree():
-		get_tree().change_scene_to_file("res://Scenes/game_level.tscn")
-
-func _on_player_loses() -> void:
-	battle_active = false
-	sfx_loseBattle.play()
-	scrambled_label.text = "[center][color=#ff5555]You failed to unscramble the word...[/color][/center]"
-	instruction_label.text = "Mission Failed"
-
-	GlobalGameState.current_battle_npc = ""
-	GlobalGameState.current_battle_sentence = ""
-	
-	await get_tree().create_timer(2.0).timeout
-	if get_tree():
-		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	_on_battle_won()
 
 func _on_time_runs_out() -> void:
 	battle_active = false
 	scrambled_label.text = "[center][color=#ff5555]Time's up![/color][/center]"
 	instruction_label.text = "Out of Time"
-	
-	GlobalGameState.current_battle_npc = ""
-	GlobalGameState.current_battle_sentence = ""
-	
-	await get_tree().create_timer(2.0).timeout
-	if get_tree():
-		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+
+	_on_battle_lost()
