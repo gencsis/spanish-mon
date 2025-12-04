@@ -3,6 +3,7 @@ extends Node2D
 @onready var image := $Sprite2D
 @onready var anim := $AnimationPlayer
 @onready var skip : Label = $CanvasLayer/SkipLabel
+@onready 
 
 var frames = [
 	preload("res://Assets/intro-animation/intro-1.png"),

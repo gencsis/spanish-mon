@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci474otp5hyle"]
+[gd_scene load_steps=6 format=3 uid="uid://ci474otp5hyle"]
 
 [ext_resource type="Script" uid="uid://bxa0cm8yagcv3" path="res://intro.gd" id="1_ayt76"]
+[ext_resource type="AudioStream" uid="uid://riwdvxdln1m" path="res://Assets/Music/8bit_Let's do this!.mp3" id="2_0a7ni"]
 [ext_resource type="Texture2D" uid="uid://c0traylrxspi5" path="res://Assets/intro-animation/intro-1.png" id="2_7a8ye"]
 
 [sub_resource type="Animation" id="Animation_0a7ni"]
@@ -83,5 +84,10 @@ offset_top = -16.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Press any button to skip"
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0a7ni")
+volume_db = -8.621
+autoplay = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
