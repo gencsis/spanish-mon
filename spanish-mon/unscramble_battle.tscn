@@ -88,14 +88,19 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BattleMusic_Unscramble" type="AudioStreamPlayer2D" parent="."]
+[node name="BattleMusic_Unscramble" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_dhrt7")
+volume_db = -7.0
+autoplay = true
 
-[node name="sfx_loseHeart" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx_loseHeart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_a8uah")
+volume_db = -2.0
 
-[node name="sfx_winBattle" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx_winBattle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_mbbnl")
+volume_db = -5.0
 
-[node name="sfx_loseBattle" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx_loseBattle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_5dfju")
+volume_db = -5.0

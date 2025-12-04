@@ -8,13 +8,11 @@ class_name TypingBattle
 @onready var sfx_loseHeart = $sfx_loseHeart
 @onready var sfx_winBattle = $sfx_winBattle
 @onready var sfx_loseBattle = $sfx_loseBattle
-
 @onready var heart_icons: Array[TextureRect] = [
 	$Hearts/Heart,
 	$Hearts/Heart2,
 	$Hearts/Heart3,
 ]
-
 const FULL_HEART  = preload("res://Assets/UI/hearts_one1.png")
 const EMPTY_HEART = preload("res://Assets/UI/hearts_one2.png")
 
@@ -30,7 +28,6 @@ var battle_active: bool = true
 var max_hearts: int = 3
 var hearts: int = 3
 
-
 const PLAYER_TYPED_COLOR := "#4CAF50"     
 const PLAYER_REMAIN_COLOR := "#1a1a1a"   
 const CURRENT_CHAR_COLOR := "#FFD700" 
@@ -39,7 +36,7 @@ func _ready() -> void:
 	player_index = 0
 	enemy_index = 0
 	battle_active = true
-
+	
 	hearts = GlobalGameState.get_current_health()
 	max_hearts = GlobalGameState.player_max_health
 	_update_hearts()

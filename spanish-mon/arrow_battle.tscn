@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7ebxxtqunpk0"]
+[gd_scene load_steps=10 format=3 uid="uid://c7ebxxtqunpk0"]
 
 [ext_resource type="Script" uid="uid://p36b0tnxol2n" path="res://arrow_battle.gd" id="1_2vkpa"]
 [ext_resource type="Texture2D" uid="uid://bjhm2c6oxs8r" path="res://Assets/backgrounds/dance_background.png" id="2_70v6o"]
 [ext_resource type="Texture2D" uid="uid://cvtneu22c40wh" path="res://Assets/player/player_animations.png" id="3_wxgxe"]
 [ext_resource type="Texture2D" uid="uid://5c6khupf5hjr" path="res://Assets/TEMP_CHARACTERS/white_cat.png" id="4_dbcuo"]
 [ext_resource type="AudioStream" uid="uid://c1ml5p0lslt76" path="res://Assets/Music/damage4.mp3" id="5_172nq"]
+[ext_resource type="AudioStream" uid="uid://bma2hgxeojfoy" path="res://Assets/Music/8bit_Pull The Trigger.mp3" id="5_m8o2h"]
 [ext_resource type="AudioStream" uid="uid://ddqcbp20p0ki1" path="res://Assets/Music/mixkit-winning-swoosh-2017.mp3" id="6_m8o2h"]
 [ext_resource type="AudioStream" uid="uid://3s6nidjfewj7" path="res://Assets/Music/mixkit-losing-bleeps-2026 (1).mp3" id="7_jc72c"]
 
@@ -105,11 +106,19 @@ offset_top = 23.0
 offset_right = 61.0
 offset_bottom = 63.0
 
-[node name="sfx_loseHeart" type="AudioStreamPlayer2D" parent="."]
+[node name="BattleMusic_Arrow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_m8o2h")
+volume_db = -7.0
+autoplay = true
+
+[node name="sfx_loseHeart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_172nq")
+volume_db = -2.0
 
-[node name="sfx_winBattle" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx_winBattle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_m8o2h")
+volume_db = -5.0
 
-[node name="sfx_loseBattle" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx_loseBattle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_jc72c")
+volume_db = -5.0
