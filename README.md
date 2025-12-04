@@ -1,2 +1,2 @@
-# spanish-mon
-Adventure-based language learning game.
+# cosmic-keys
+Adventure-based typing game.
