@@ -18,16 +18,16 @@ func _on_all_pieces_collected() -> void:
 
 func get_interaction_options() -> Array[String]:
 	if has_all_pieces:
-		return ["fix", "inspect"]
+		return ["fix", "look"]
 	else:
-		return ["inspect"]
+		return ["look"]
 
 func _on_player_entered() -> void:
 	if has_all_pieces:
 		if typing_choice:
-			typing_choice.options = ["fix", "inspect"]
+			typing_choice.options = ["fix", "look"]
 			typing_choice.start_choices()
-		_show_dialogue("Type [fix] to repair your ship, or [inspect] to examine it.")
+		_show_dialogue("Type [fix] to repair your ship.")
 	else:
 		var pieces_left = GlobalGameState.TOTAL_SHIP_PIECES - GlobalGameState.ship_pieces_collected
 		_show_dialogue("Your ship is badly damaged. You need %d more piece(s) to repair it." % pieces_left)
@@ -77,4 +77,4 @@ func _on_escape_typed(index: int, word: String) -> void:
 		await get_tree().create_timer(2.0).timeout
 		
 		if get_tree():
-			get_tree().change_scene_to_file("res://Scenes/end_menu.tscn")
+			get_tree().change_scene_to_file("res://end_menu.tscn")

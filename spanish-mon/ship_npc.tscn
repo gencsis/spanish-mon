@@ -29,3 +29,4 @@ shape = SubResource("RectangleShape2D_y4uv4")
 shape = SubResource("CircleShape2D_12onc")
 
 [node name="TypingChoice" parent="." instance=ExtResource("3_vmpya")]
+options = Array[String](["grab", "look"])
