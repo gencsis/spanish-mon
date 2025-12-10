@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://mcht266g817e"
-path="res://.godot/imported/CourierPrime-Italic.ttf-baa9156a73770735a0f72fb20b907112.fontdata"
+path="res://.godot/imported/CourierPrime-Italic.ttf-72e21ac7ee4c5fc31a235a0eba0aff92.fontdata"
 
 [deps]
 
-source_file="res://addons/gut/fonts/CourierPrime-Italic.ttf"
-dest_files=["res://.godot/imported/CourierPrime-Italic.ttf-baa9156a73770735a0f72fb20b907112.fontdata"]
+source_file="res://Addons/gut/fonts/CourierPrime-Italic.ttf"
+dest_files=["res://.godot/imported/CourierPrime-Italic.ttf-72e21ac7ee4c5fc31a235a0eba0aff92.fontdata"]
 
 [params]
 

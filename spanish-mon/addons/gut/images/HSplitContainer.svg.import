@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ljc2viafngwd"
-path="res://.godot/imported/HSplitContainer.svg-81e594d94ee80e4176e099672ef6025b.ctex"
+path="res://.godot/imported/HSplitContainer.svg-392d103da3df4c06aef5eb2ff49f7164.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gut/images/HSplitContainer.svg"
-dest_files=["res://.godot/imported/HSplitContainer.svg-81e594d94ee80e4176e099672ef6025b.ctex"]
+source_file="res://Addons/gut/images/HSplitContainer.svg"
+dest_files=["res://.godot/imported/HSplitContainer.svg-392d103da3df4c06aef5eb2ff49f7164.ctex"]
 
 [params]
 

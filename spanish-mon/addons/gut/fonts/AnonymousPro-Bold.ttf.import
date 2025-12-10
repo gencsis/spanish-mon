@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c8axnpxc0nrk4"
-path="res://.godot/imported/AnonymousPro-Bold.ttf-9d8fef4d357af5b52cd60afbe608aa49.fontdata"
+path="res://.godot/imported/AnonymousPro-Bold.ttf-c2444efdd0a766160c8aed8580472947.fontdata"
 
 [deps]
 
-source_file="res://addons/gut/fonts/AnonymousPro-Bold.ttf"
-dest_files=["res://.godot/imported/AnonymousPro-Bold.ttf-9d8fef4d357af5b52cd60afbe608aa49.fontdata"]
+source_file="res://Addons/gut/fonts/AnonymousPro-Bold.ttf"
+dest_files=["res://.godot/imported/AnonymousPro-Bold.ttf-c2444efdd0a766160c8aed8580472947.fontdata"]
 
 [params]
 
